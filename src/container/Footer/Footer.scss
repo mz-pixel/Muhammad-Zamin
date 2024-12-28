@@ -1,0 +1,235 @@
+.app__footer {
+  flex: 1;
+  width: 100%;
+  flex-direction: column;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.app__footer-cards {
+  width: 60%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 3em 2rem 2rem;
+
+  .app__footer-card {
+    min-width: 290px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #ffffff;
+
+    svg {
+      width: 40px;
+      height: 40px;
+      margin: 0 0.7rem;
+    }
+
+    // p {
+    //   font-weight: 500;
+    //   font-size: 1rem;
+    // }
+    p {
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+    &:hover {
+      // box-shadow: 0 0 25px #ffffff;
+      background-color: #000000;
+      p {
+        color: #ffffff;
+      }
+      svg {
+        fill: #ffffff;
+      }
+    }
+
+    @media screen and (max-width: 450px) {
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+// .app__footer-cards .app__footer-card:last-child {
+//   background-color: #ffffff;
+// }
+
+// .app__footer-cards .app__footer-card:last-child:hover {
+//   box-shadow: 0 0 25px #ffffff;
+// }
+
+.app__footer-form {
+  width: 60%;
+  flex-direction: column;
+  margin: 1rem 2rem;
+
+  div {
+    width: 100%;
+
+    margin: 0.75rem 0;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: var(--lightGray-color);
+
+    transition: all 0.3s ease-in-out;
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 0.95rem;
+      border: none;
+      border-radius: 7px;
+      background-color: var(--lightGray-color);
+
+      font-family: var(--font-base);
+      font-size: 1rem;
+      color: var(--secondary-color);
+      outline: none;
+    }
+
+    textarea {
+      height: 170px;
+    }
+
+    &:hover {
+      box-shadow: 0 0 25px var(--primary-color);
+    }
+  }
+
+  button {
+    padding: 0.7rem 1.4rem;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--black-color);
+
+    font-weight: 500;
+    color: var(--white-color);
+    outline: none;
+    margin: 2rem 0 0 0;
+    font-family: var(--font-base);
+    font-size: 1rem;
+
+    transition: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    cursor: pointer;
+
+    --s: 40px;
+    --b: 2px;
+    --g: 4px;
+    --c: #000000;
+
+    outline: calc(var(--s) / 2) solid rgba(0, 0, 0, 0);
+    outline-offset: calc(var(--s) / -2);
+
+    &:hover {
+      outline: var(--b) solid var(--c);
+      outline-offset: var(--g);
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    margin: 1rem 0;
+  }
+}
+
+.app__footer-resume {
+  min-width: 290px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #000000;
+
+  svg {
+    width: 40px;
+    height: 40px;
+    margin: 0 0.7rem;
+    color: #ffffff;
+  }
+
+  // p {
+  //   font-weight: 500;
+  //   font-size: 1rem;
+  // }
+  p {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+  &:hover {
+    // box-shadow: 0 0 25px #ffffff;
+    background-color: #ffffff;
+    p {
+      color: #000000;
+    }
+    svg {
+      color: #000000;
+    }
+  }
+}
+
+#resumeDiv {
+  min-width: 290px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px #000000;
+  border: 2px solid rgba(0, 0, 0, 1);
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #000000;
+  svg {
+    width: 40px;
+    height: 40px;
+    margin: 0 0.7rem;
+    color: #ffffff;
+  }
+
+  // p {
+  //   font-weight: 500;
+  //   font-size: 1rem;
+  // }
+  p {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+  &:hover {
+    // box-shadow: 0 0 25px #ffffff;
+    background-color: #ffffff;
+    p {
+      color: #000000;
+    }
+    svg {
+      color: #000000;
+      fill: #000000;
+    }
+  }
+  @media screen and (max-width: 450px) {
+    width: 100%;
+  }
+}
