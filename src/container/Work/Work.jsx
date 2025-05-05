@@ -125,7 +125,7 @@ const Work = () => {
                       ? "react js"
                       : work.title === "Business Finder"
                       ? "React, Spring, JavaScript"
-                      : "nothing"}
+                      : "Love 💖"}
                   </p>
                 </div>
               </a>

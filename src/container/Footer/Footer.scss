@@ -34,18 +34,12 @@
       height: 40px;
       margin: 0 0.7rem;
     }
-
-    // p {
-    //   font-weight: 500;
-    //   font-size: 1rem;
-    // }
     p {
       text-decoration: none;
       font-weight: 500;
       font-size: 1.1rem;
     }
     &:hover {
-      // box-shadow: 0 0 25px #ffffff;
       background-color: #000000;
       p {
         color: #ffffff;
@@ -64,14 +58,6 @@
     width: 100%;
   }
 }
-
-// .app__footer-cards .app__footer-card:last-child {
-//   background-color: #ffffff;
-// }
-
-// .app__footer-cards .app__footer-card:last-child:hover {
-//   box-shadow: 0 0 25px #ffffff;
-// }
 
 .app__footer-form {
   width: 60%;
@@ -166,18 +152,12 @@
     margin: 0 0.7rem;
     color: #ffffff;
   }
-
-  // p {
-  //   font-weight: 500;
-  //   font-size: 1rem;
-  // }
   p {
     text-decoration: none;
     font-weight: 500;
     font-size: 1.1rem;
   }
   &:hover {
-    // box-shadow: 0 0 25px #ffffff;
     background-color: #ffffff;
     p {
       color: #000000;
@@ -207,11 +187,6 @@
     margin: 0 0.7rem;
     color: #ffffff;
   }
-
-  // p {
-  //   font-weight: 500;
-  //   font-size: 1rem;
-  // }
   p {
     text-decoration: none;
     color: #ffffff;

@@ -23,13 +23,14 @@ const Footer = () => {
       </h2>
 
       <div className="app__footer-cards">
-        <div className="app__footer-card ">
-          <HiMail />
-          <div className="p-text" onClick={copyToClipboard}>
-            <p id="email">{email}</p>
+        <a onClick={copyToClipboard}>
+          <div className="app__footer-card ">
+            <HiMail />
+            <div className="p-text">
+              <p id="email">{email}</p>
+            </div>
           </div>
-        </div>
-        {/* <div> */}
+        </a>
         <a
           href="/Muhammad Zamin resume.pdf"
           className="app__footer-mobile-resume"
@@ -42,7 +43,6 @@ const Footer = () => {
             </div>
           </div>
         </a>
-        {/* </div> */}
       </div>
     </>
   );
