@@ -198,3 +198,44 @@
     }
   }
 }
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.app__work-smallpill {
+  border-radius: 5px;
+  background-color: #fff;
+  color: #000;
+  padding: 0.1rem 0.2rem 0.1rem 0.2rem;
+
+  cursor: default;
+  transition: all 0.1s ease;
+  margin: 0.2rem;
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  &:hover {
+    background-color: var(--black-color);
+    color: #fff;
+  }
+
+  @media screen and (min-width: 2000px) {
+    padding: 1rem 2rem;
+    border-radius: 0.85rem;
+  }
+}
