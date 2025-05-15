@@ -36,7 +36,7 @@ const Navbar = () => {
       }}
     >
       <div className="app__navbar-pill app__navbar-logo">
-        <h1 className="app__navbar-name">Muhammad Zamin</h1>
+        <h1 className="app__navbar-name">MZ</h1>
       </div>
 
       <div className="app__navbar-pill app__navbar-nav">
