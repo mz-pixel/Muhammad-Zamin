@@ -48,12 +48,12 @@ const Skills = () => {
             color: "black",
           }}
         >
-          I am a third year student at the York University, studying Computer
-          Science. I am a self-taught web developer and have been working with
-          React for over a year now. I am also familiar with other web
-          technologies such as Node.js, Express.js, and MongoDB. I am currently
-          looking for a Software Engineering internship to gain work experience
-          in the field.
+          I am a fourth year student at the York University, pursuing
+          Specialized Honours BSc in Computer Science. I am a self-taught web
+          developer and have been working with React for over two years now. I
+          am also familiar with other web technologies such as Node.js,
+          Express.js, and MongoDB. I am currently looking for a Software
+          Engineering internship to gain work experience in the field.
         </p>
       </div>
 

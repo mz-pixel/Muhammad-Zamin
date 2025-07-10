@@ -42,10 +42,10 @@ import java from "../assets/java.png";
 import mongoDB from "../assets/mongoDB.png";
 import express from "../assets/express.svg";
 import bootstrap from "../assets/bootstrap.jpg";
-import cs from "../assets/image.png";
+import medsync from "../assets/medsync.png";
 
 const images = {
-  cs,
+  medsync,
   simon,
   email,
   mobile,

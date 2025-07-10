@@ -99,12 +99,6 @@
     object-fit: cover;
   }
 
-  #Uno,
-  #Calculator {
-    object-fit: cover;
-    object-position: bottom 0px left 0px;
-  }
-
   @media screen and (min-width: 2000px) {
     height: 350px;
   }
@@ -188,13 +182,49 @@
     svg {
       margin-left: 5px;
       margin-right: 5px;
-      @media screen and (max-width: 330px) {
-        display: none;
+      @media screen and (max-width: 1080px) {
+        width: 50%;
+        height: 50%;
       }
     }
     &:hover {
       background-color: black;
       color: white;
+    }
+    .link-text {
+      display: inline;
+      @media screen and (max-width: 1080px) {
+        display: none;
+      }
+    }
+  }
+}
+
+.app__work-links {
+  width: 100%;
+  margin-top: 10px;
+  height: 50px;
+
+  .youtube {
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: rgb(255, 0, 0);
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid rgb(255, 0, 0);
+    margin-left: 5px;
+    margin-right: 5px;
+    svg {
+      margin-left: 5px;
+      margin-right: 5px;
+      @media screen and (max-width: 330px) {
+        display: none;
+      }
+    }
+    &:hover {
+      background-color: rgb(255, 0, 0);
+      color: rgb(255, 255, 255);
     }
   }
 }
@@ -224,14 +254,15 @@
   cursor: default;
   transition: all 0.1s ease;
   margin: 0.2rem;
-  backdrop-filter: blur(5px);
   background-color: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
   &:hover {
-    background-color: var(--black-color);
-    color: #fff;
+    // background-color: var(--black-color);
+    // color: #fff;
+    translate: -2% -10%;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
   @media screen and (min-width: 2000px) {
