@@ -37,7 +37,7 @@ let projects = [
     format: "WebApp",
   },
   {
-    description: "Coming soon.",
+    description: "To be added.",
     img: images.python,
     // projectLink: "https://medsync.onrender.com/",
     // codeLink: "https://github.com/mz-pixel/medsync",
