@@ -112,6 +112,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+
     background-color: var(--black-color);
     margin: 0.25rem 0;
 
@@ -125,19 +126,26 @@
 
     cursor: pointer;
 
-    transition: 0.1s;
+    transition: 1s;
 
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 2px solid var(--black-color);
     svg {
       width: 15px;
       height: 15px;
       color: var(--white-color);
+      transition: 1s;
     }
+
     &:hover {
-      outline: var(--b) solid var(--c);
-      outline-offset: var(--g);
+      background-color: #fff;
+      border: 2px solid var(--black-color);
+      svg {
+        color: var(--black-color);
+        transform: rotateY(360deg);
+      }
     }
 
     @media screen and (min-width: 2000px) {
@@ -173,8 +181,6 @@
 
     &:hover {
       background-color: var(--black-color);
-      outline: 2px solid #000000;
-      outline-offset: 3px;
     }
 
     @media screen and (min-width: 2000px) {
@@ -185,8 +191,10 @@
 }
 
 @media screen and (max-width: 570px) {
-  .app__navigation,
   .app__social {
+    z-index: 1000;
+  }
+  .app__navigation {
     display: none;
   }
 

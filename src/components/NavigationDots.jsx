@@ -14,8 +14,6 @@ const NavigationDots = ({ active }) => (
           active === item
             ? {
                 backgroundColor: "#000",
-                outline: "2px solid #000000",
-                outlineOffset: "4px",
               }
             : {}
         }
