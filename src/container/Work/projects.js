@@ -33,7 +33,7 @@ let projects = [
     tags: ["React", "Express", "SQL", "Node JS"],
     title: "MedSync",
     made: "",
-    // youtubeLink: "https://www.youtube.com/watch?v=1b2k0d3g4e8",
+    youtubeLink: "https://youtu.be/vg_25TuxuG8",
     format: "WebApp",
   },
   {
