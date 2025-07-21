@@ -29,7 +29,7 @@ let projects = [
       "Developed a medical appointment app using SQL and Express.js. Implemented a starvation-free scheduling algorithm to ensure fair and timely bookings.",
     img: images.medsync,
     // projectLink: "https://medsync.onrender.com/",
-    codeLink: "https://github.com/mz-pixel/CtrlHackDel-Submission",
+    codeLink: "https://github.com/mz-pixel/MedSync",
     tags: ["React", "Express", "SQL", "Node JS"],
     title: "MedSync",
     made: "",

@@ -54,6 +54,18 @@
     }
   }
 
+  .email-card {
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+    justify-content: center;
+
+    .email-instructions {
+      font-size: 0.8rem;
+    }
+  }
+
   @media screen and (max-width: 768px) {
     width: 100%;
   }

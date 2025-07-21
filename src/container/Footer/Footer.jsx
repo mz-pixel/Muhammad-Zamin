@@ -26,8 +26,9 @@ const Footer = () => {
         <a onClick={copyToClipboard}>
           <div className="app__footer-card ">
             <HiMail />
-            <div className="p-text">
+            <div className="p-text email-card">
               <p id="email">{email}</p>
+              <p className="email-instructions">Click to copy</p>
             </div>
           </div>
         </a>

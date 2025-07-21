@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Navbar.scss";
 import { HiMenuAlt4, HiX, HiDocument } from "react-icons/hi";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useColorModeValue } from "../index.js";
 // import { textDecoration } from "@chakra-ui/react";
 
@@ -68,40 +68,54 @@ const Navbar = () => {
             className="app__navbar-mobile-close"
           />
         )}
-        {toggle && (
-          <motion.div
-            whileInView={{ x: [300, 0] }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="app__navbar-mobile"
-          >
-            <ul>
-              {sections.map((item) => (
-                <li key={item}>
+
+        <AnimatePresence>
+          {toggle && (
+            <motion.div
+              key="mobile-menu" // Crucial: A unique key is required for AnimatePresence
+              variants={{
+                hidden: { x: 300, opacity: 0 },
+                visible: { x: 0, opacity: 1 },
+                exit: { x: 300, opacity: 0 },
+              }}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              transition={{
+                duration: 0.3,
+                ease: "easeOut",
+              }}
+              className="app__navbar-mobile"
+            >
+              <ul>
+                {sections.map((item) => (
+                  <li key={item}>
+                    <a
+                      href={`#${item}`}
+                      onClick={() => {
+                        setActive(item);
+                      }}
+                      className={active === item ? "active" : ""}
+                    >
+                      {item}
+                    </a>
+                  </li>
+                ))}
+                <li className="app__navbar-mobile-resume">
                   <a
-                    href={`#${item}`}
-                    onClick={() => {
-                      setActive(item);
-                    }}
-                    className={active === item ? "active" : ""}
+                    href="/Muhammad Zamin resume.pdf"
+                    className="app__navbar-mobile-resume"
                   >
-                    {item}
+                    <div className="app__flex">
+                      <strong style={{ textDecoration: "none" }}>Resume</strong>
+                      <HiDocument />
+                    </div>
                   </a>
                 </li>
-              ))}
-              <li className="app__navbar-mobile-resume">
-                <a
-                  href="/Muhammad Zamin resume.pdf"
-                  className="app__navbar-mobile-resume"
-                >
-                  <div className="app__flex">
-                    <strong style={{ textDecoration: "none" }}>Resume</strong>
-                    <HiDocument />
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </motion.div>
-        )}
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   );
