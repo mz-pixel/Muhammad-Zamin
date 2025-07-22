@@ -38,7 +38,8 @@ const Work = () => {
 
       <div className="app__work-filter">
         {/* {["WebApp", "Hardware", "Computer Security", "Machine Learning", "Other"].map( */}
-        {["WebApp", "Machine Learning", "Other"].map((item, index) => (
+        {/* {["WebApp", "Machine Learning", "Other"].map((item, index) => ( */}
+        {["WebApp"].map((item, index) => (
           <div
             key={index}
             onClick={() => handleWorkFilter(item)}
@@ -57,7 +58,7 @@ const Work = () => {
         className="app__work-portfolio"
       >
         {filterWork.map((work, index) => (
-          <div className="app__work-item app__flex" key={index}>
+          <div className="app__work-item app__flex" key={index + 100}>
             <div className="app__work-img app__flex">
               <img src={work.img} alt={work.title} id={work.title} />
             </div>
@@ -69,40 +70,42 @@ const Work = () => {
               >
                 <h4 className="bold-text">{work.title}</h4>
               </a>
-              <a
-                href={work.codeLink}
-                style={{ color: "inherit", textDecoration: "none" }}
-              >
+              <div style={{ color: "inherit", textDecoration: "none" }}>
                 <p className="p-text" style={{ marginTop: 10 }}>
                   {work.description}
                 </p>
                 <div className="app__work-tag app__flex">
-                  <p className="p-text row">
+                  <div className="p-text row">
                     <b>MADE WITH: </b>
                     {work.tags.map((tag, index) => (
-                      <p className="p-text app__work-smallpill center">{tag}</p>
+                      <p
+                        className="p-text app__work-smallpill center"
+                        key={index + 200}
+                      >
+                        {tag}
+                      </p>
                     ))}
-                  </p>
+                  </div>
                 </div>
-              </a>
+              </div>
 
               <div className="app__work-links app__flex">
                 {work.codeLink && (
                   <a className="github app__flex" href={work.codeLink}>
                     <AiFillGithub />
-                    <span class="link-text">Github</span>
+                    <span className="link-text">Github</span>
                   </a>
                 )}
                 {work.projectLink && (
                   <a className="website app__flex" href={work.projectLink}>
                     <AiFillEye />
-                    <span class="link-text">Website</span>
+                    <span className="link-text">Website</span>
                   </a>
                 )}
                 {work.youtubeLink && (
                   <a className="youtube app__flex" href={work.youtubeLink}>
                     <AiFillYoutube />
-                    <span class="link-text">Youtube</span>
+                    <span className="link-text">Youtube</span>
                   </a>
                 )}
               </div>

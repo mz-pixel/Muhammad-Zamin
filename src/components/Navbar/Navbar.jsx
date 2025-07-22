@@ -61,7 +61,10 @@ const Navbar = () => {
 
       <div className="app__navbar-menu">
         {!toggle ? (
-          <HiMenuAlt4 onClick={() => setToggle(true)} />
+          <HiMenuAlt4
+            onClick={() => setToggle(true)}
+            className="app__navbar-mobile-open"
+          />
         ) : (
           <HiX
             onClick={() => setToggle(false)}

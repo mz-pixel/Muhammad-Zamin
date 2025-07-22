@@ -23,7 +23,11 @@ const Footer = () => {
       </h2>
 
       <div className="app__footer-cards">
-        <a onClick={copyToClipboard}>
+        <a
+          onClick={copyToClipboard}
+          href="#contact"
+          style={{ textDecoration: "None", color: "black" }}
+        >
           <div className="app__footer-card ">
             <HiMail />
             <div className="p-text email-card">
@@ -32,6 +36,15 @@ const Footer = () => {
             </div>
           </div>
         </a>
+        {/* <button onClick={copyToClipboard}>
+          <div className="app__footer-card ">
+            <HiMail />
+            <div className="p-text email-card">
+              <p id="email">{email}</p>
+              <p className="email-instructions">Click to copy</p>
+            </div>
+          </div>
+        </button> */}
         <a
           href="/Muhammad Zamin resume.pdf"
           className="app__footer-mobile-resume"
