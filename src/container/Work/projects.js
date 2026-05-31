@@ -47,6 +47,18 @@ let projects = [
     // youtubeLink: "https://www.youtube.com/watch?v=1b2k0d3g4e8",
     format: "Machine Learning",
   },
+  {
+    description:
+      "Developed a bill-splitting mobile application using React Native for frontend and node.js for backend. Used SQList to store user data and implement authentication.",
+    img: images.sharelyst,
+    // projectLink: "https://medsync.onrender.com/",
+    codeLink: "https://github.com/Sharelyst/Sharelyst",
+    tags: ["React Native", "SQLite", "Expo", "TypeScript"],
+    title: "ShareLyst: Bill Splitting App",
+    made: "",
+    youtubeLink: "https://www.youtube.com/watch?v=UxKVCL1k2H4",
+    format: "Mobile Application",
+  },
 ];
 
 export default projects;

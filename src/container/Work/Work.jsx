@@ -37,7 +37,7 @@ const Work = () => {
 
       {/* Filter pills */}
       <div className="work-section__filters">
-        {["WebApp", "Machine Learning"].map((item) => (
+        {["WebApp", "Machine Learning", "Mobile Application"].map((item) => (
           <button
             key={item}
             onClick={() => handleWorkFilter(item)}

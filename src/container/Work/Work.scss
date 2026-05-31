@@ -70,7 +70,9 @@
 
   &:hover {
     transform: translateY(-6px);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(108, 99, 255, 0.15);
+    box-shadow:
+      0 16px 48px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(108, 99, 255, 0.15);
 
     .project-card__image {
       transform: scale(1.06);
@@ -198,11 +200,23 @@
     border-color: rgba(108, 99, 255, 0.3);
   }
 
+  // &--youtube {
+  //   &:hover {
+  //     color: #ff4444;
+  //     background: rgba(255, 68, 68, 0.1);
+  //     border-color: rgba(255, 68, 68, 0.3);
+  //   }
+  // }
   &--youtube {
-    &:hover {
+    & {
       color: #ff4444;
       background: rgba(255, 68, 68, 0.1);
       border-color: rgba(255, 68, 68, 0.3);
+    }
+    &:hover {
+      color: #ffffff;
+      background: rgba(255, 68, 68, 0.6);
+      border-color: rgba(255, 68, 68, 0.9);
     }
   }
 }

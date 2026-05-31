@@ -43,8 +43,10 @@ import mongoDB from "../assets/mongoDB.png";
 import express from "../assets/express.svg";
 import bootstrap from "../assets/bootstrap.jpg";
 import medsync from "../assets/medsync.png";
+import sharelyst from "../assets/sharelyst.png";
 
 const images = {
+  sharelyst,
   medsync,
   // simon,
   email,
