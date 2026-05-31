@@ -1,69 +1,90 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { AppWrap, MotionWrap } from "../../wrapper";
+import SocialMedia from "../../components/SocialMedia";
 import "./Footer.scss";
-import { HiMail } from "react-icons/hi";
-import { HiDocument } from "react-icons/hi";
+import { HiMail, HiDocument } from "react-icons/hi";
+import { BsCheckCircleFill } from "react-icons/bs";
 
 const Footer = () => {
-  const [email, setEmail] = useState("zamin@my.yorku.ca");
+  const [copied, setCopied] = useState(false);
 
   const copyToClipboard = async () => {
     try {
       await navigator.clipboard.writeText("zamin@my.yorku.ca");
-      setEmail("Copied to clipboard!");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
     } catch (err) {
       console.error("Failed to copy email: ", err);
     }
   };
-  return (
-    <>
-      <h2 className="head-text">
-        If you find my work impressive, I'd love to discuss further. Let's
-        connect!
-      </h2>
 
-      <div className="app__footer-cards">
-        <a
-          onClick={copyToClipboard}
-          href="#contact"
-          style={{ textDecoration: "None", color: "black" }}
-        >
-          <div className="app__footer-card ">
-            <HiMail />
-            <div className="p-text email-card">
-              <p id="email">{email}</p>
-              <p className="email-instructions">Click to copy</p>
-            </div>
-          </div>
-        </a>
-        {/* <button onClick={copyToClipboard}>
-          <div className="app__footer-card ">
-            <HiMail />
-            <div className="p-text email-card">
-              <p id="email">{email}</p>
-              <p className="email-instructions">Click to copy</p>
-            </div>
-          </div>
-        </button> */}
-        <a
-          href="/Muhammad Zamin resume.pdf"
-          className="app__footer-mobile-resume"
-          style={{ textDecoration: "none" }}
-        >
-          <div className="app__footer-card app__footer-resume" id="resumeDiv">
-            <HiDocument />
-            <div className="p-text">
-              <p>Resume</p>
-            </div>
-          </div>
-        </a>
+  return (
+    <div className="footer-section">
+      <div className="footer-section__header">
+        <h2 className="section-heading" id="footer-heading">
+          Let's <span className="accent">Connect</span>
+        </h2>
+        <p className="section-subtitle" style={{ textAlign: "center" }}>
+          If you find my work impressive, I'd love to discuss further. Let's
+          build something great together!
+        </p>
       </div>
-    </>
+
+      <div className="footer-section__cards">
+        {/* Email card */}
+        <motion.button
+          className="footer-card glass-card"
+          onClick={copyToClipboard}
+          whileHover={{ y: -4 }}
+          whileTap={{ scale: 0.98 }}
+          id="footer-email-card"
+        >
+          <div className="footer-card__icon">
+            {copied ? (
+              <BsCheckCircleFill className="footer-card__check" />
+            ) : (
+              <HiMail />
+            )}
+          </div>
+          <div className="footer-card__text">
+            <span className="footer-card__label">
+              {copied ? "Copied!" : "Email"}
+            </span>
+            <span className="footer-card__value">zamin@my.yorku.ca</span>
+          </div>
+        </motion.button>
+
+        {/* Resume card */}
+        <motion.a
+          href="/Muhammad Zamin resume.pdf"
+          className="footer-card footer-card--resume glass-card"
+          whileHover={{ y: -4 }}
+          whileTap={{ scale: 0.98 }}
+          id="footer-resume-card"
+        >
+          <div className="footer-card__icon">
+            <HiDocument />
+          </div>
+          <div className="footer-card__text">
+            <span className="footer-card__label">Resume</span>
+            <span className="footer-card__value">Download PDF</span>
+          </div>
+        </motion.a>
+      </div>
+
+      {/* Social links */}
+      <div className="footer-section__social">
+        <SocialMedia size="lg" />
+      </div>
+
+      {/* Separator */}
+      <div className="footer-section__separator" />
+    </div>
   );
 };
 
 export default AppWrap(
-  MotionWrap(Footer, "app__footer"),
-  "contact",
-  "app__whitebg"
+  MotionWrap(Footer, "footer-section__wrapper"),
+  "contact"
 );

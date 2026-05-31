@@ -1,12 +1,5 @@
-import NavigationDots from "./NavigationDots";
 import SocialMedia from "./SocialMedia";
 import Navbar from "./Navbar/Navbar";
-import { ThemeToggleButton, useColorModeValue } from "./ToggleTheme";
+import ParticleBackground from "./ParticleBackground";
 
-export {
-  NavigationDots,
-  SocialMedia,
-  Navbar,
-  ThemeToggleButton,
-  useColorModeValue,
-};
+export { SocialMedia, Navbar, ParticleBackground };

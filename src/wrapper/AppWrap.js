@@ -1,5 +1,4 @@
 import React from "react";
-import { SocialMedia, NavigationDots } from "../components";
 
 const AppWrap = (Component, idName, classNames) =>
   function HOC() {
@@ -7,27 +6,19 @@ const AppWrap = (Component, idName, classNames) =>
     const year = date.getFullYear();
 
     return (
-      <div
+      <section
         id={idName}
-        className={`app__container ${classNames}`}
-        style={{
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "repeat",
-        }}
+        className={`app__section ${classNames || ""}`}
       >
-        <SocialMedia />
-        <div className="app__wrapper app__flex">
+        <div className="app__section-inner">
           <Component />
           {idName === "contact" && (
             <div className="copyright">
-              <p className="p-text">© {year} Muhammad Zamin</p>
-              <p className="p-text">All rights reserved.</p>
+              <p>© {year} Muhammad Zamin. All rights reserved.</p>
             </div>
           )}
         </div>
-        <NavigationDots active={idName} />
-      </div>
+      </section>
     );
   };
 

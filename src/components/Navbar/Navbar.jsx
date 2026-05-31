@@ -2,19 +2,19 @@ import React, { useState, useEffect } from "react";
 import "./Navbar.scss";
 import { HiMenuAlt4, HiX, HiDocument } from "react-icons/hi";
 import { AnimatePresence, motion } from "framer-motion";
-import { useColorModeValue } from "../index.js";
-// import { textDecoration } from "@chakra-ui/react";
 
 const sections = ["home", "skills", "work", "contact"];
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   const [active, setActive] = useState("home");
+  const [scrolled, setScrolled] = useState(false);
 
-  // Scroll listener to update active nav link
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY + 200; // buffer offset
+      setScrolled(window.scrollY > 50);
+
+      const scrollY = window.scrollY + 200;
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = document.getElementById(sections[i]);
         if (section && section.offsetTop <= scrollY) {
@@ -27,100 +27,122 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  return (
-    <nav
-      className="app__navbar"
-      style={{
-        backgroundColor:
-          useColorModeValue("light", "dark") === "dark" && "rgb(0, 0, 0, 0.35)",
-      }}
-    >
-      <div className="app__navbar-pill app__navbar-logo">
-        <h1 className="app__navbar-name">MZ</h1>
-      </div>
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (toggle) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [toggle]);
 
-      <div className="app__navbar-pill app__navbar-nav">
-        <ul className="app__navbar-links">
+  return (
+    <motion.nav
+      className={`navbar ${scrolled ? "navbar--scrolled" : ""}`}
+      initial={{ y: -80 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <a href="#home" className="navbar__logo" id="navbar-logo">
+        <span className="navbar__logo-text">MZ</span>
+      </a>
+
+      <div className="navbar__links-wrapper">
+        <ul className="navbar__links">
           {sections.map((item) => (
-            <li key={`link-${item}`} className="app__flex p-text">
-              <a href={`#${item}`} className={active === item ? "active" : ""}>
+            <li key={`nav-${item}`}>
+              <a
+                href={`#${item}`}
+                className={`navbar__link ${active === item ? "navbar__link--active" : ""}`}
+                id={`nav-link-${item}`}
+              >
                 {item}
               </a>
-              <div />
             </li>
           ))}
         </ul>
       </div>
 
-      <a href="/Muhammad Zamin resume.pdf" className="app__navbar-resume">
-        <div className="app__flex">
-          <strong style={{ textDecoration: "none" }}>Resume</strong>
-          <HiDocument />
-        </div>
+      <a
+        href="/Muhammad Zamin resume.pdf"
+        className="navbar__resume"
+        id="navbar-resume"
+      >
+        <HiDocument />
+        <span>Resume</span>
       </a>
 
-      <div className="app__navbar-menu">
-        {!toggle ? (
-          <HiMenuAlt4
-            onClick={() => setToggle(true)}
-            className="app__navbar-mobile-open"
-          />
-        ) : (
-          <HiX
-            onClick={() => setToggle(false)}
-            className="app__navbar-mobile-close"
-          />
-        )}
+      {/* Mobile toggle button */}
+      <button
+        className="navbar__mobile-toggle"
+        onClick={() => setToggle(!toggle)}
+        aria-label="Toggle mobile menu"
+        id="navbar-mobile-toggle"
+      >
+        {toggle ? <HiX /> : <HiMenuAlt4 />}
+      </button>
 
-        <AnimatePresence>
-          {toggle && (
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {toggle && (
+          <>
             <motion.div
-              key="mobile-menu" // Crucial: A unique key is required for AnimatePresence
-              variants={{
-                hidden: { x: 300, opacity: 0 },
-                visible: { x: 0, opacity: 1 },
-                exit: { x: 300, opacity: 0 },
-              }}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              transition={{
-                duration: 0.3,
-                ease: "easeOut",
-              }}
-              className="app__navbar-mobile"
+              className="navbar__mobile-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setToggle(false)}
+            />
+            <motion.div
+              key="mobile-menu"
+              className="navbar__mobile"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
-              <ul>
-                {sections.map((item) => (
-                  <li key={item}>
+              <ul className="navbar__mobile-links">
+                {sections.map((item, index) => (
+                  <motion.li
+                    key={item}
+                    initial={{ x: 50, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.1 + index * 0.08, duration: 0.4 }}
+                  >
                     <a
                       href={`#${item}`}
-                      onClick={() => {
-                        setActive(item);
-                      }}
+                      onClick={() => setToggle(false)}
                       className={active === item ? "active" : ""}
+                      id={`mobile-nav-${item}`}
                     >
                       {item}
                     </a>
-                  </li>
+                  </motion.li>
                 ))}
-                <li className="app__navbar-mobile-resume">
+                <motion.li
+                  initial={{ x: 50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.1 + sections.length * 0.08, duration: 0.4 }}
+                >
                   <a
                     href="/Muhammad Zamin resume.pdf"
-                    className="app__navbar-mobile-resume"
+                    className="navbar__mobile-resume-link"
+                    id="mobile-nav-resume"
                   >
-                    <div className="app__flex">
-                      <strong style={{ textDecoration: "none" }}>Resume</strong>
-                      <HiDocument />
-                    </div>
+                    <HiDocument />
+                    <span>Resume</span>
                   </a>
-                </li>
+                </motion.li>
               </ul>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </nav>
+          </>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 };
 

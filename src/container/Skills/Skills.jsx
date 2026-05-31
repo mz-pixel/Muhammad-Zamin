@@ -1,5 +1,5 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { AppWrap, MotionWrap } from "../../wrapper";
 import "./Skills.scss";
 import experiencess from "./experiencess";
@@ -9,9 +9,6 @@ const Skills = () => {
   const [experiences, setExperiences] = useState([]);
   const [activeFilter, setActiveFilter] = useState("Expertise");
   const [filterExperience, setFilterExperience] = useState([]);
-  const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
-
-  var idx = 0;
 
   useEffect(() => {
     setExperiences(experiencess);
@@ -22,135 +19,121 @@ const Skills = () => {
 
   const handleWorkFilter = (item) => {
     setActiveFilter(item);
-    setAnimateCard([{ y: 100, opacity: 0 }]);
-
-    setTimeout(() => {
-      setAnimateCard([{ y: 0, opacity: 1 }]);
-      setFilterExperience(
-        experiences.filter((experience) => experience.tags.includes(item))
-      );
-    }, 500);
+    setFilterExperience(
+      experiences.filter((experience) => experience.tags.includes(item))
+    );
   };
 
   return (
-    <>
-      <h2 className="head-text">Skills & Experiences</h2>
-      <div
-        className="app__flex app__skills-desc"
-        style={{
-          width: "80%",
-          height: "fit-content",
-        }}
-      >
-        <p
-          className="p-text"
-          style={{
-            color: "black",
-          }}
-        >
-          I am a fourth year student at the York University, pursuing
-          Specialized Honours BSc in Computer Science. I am a self-taught web
-          developer and have been working with React for over two years now. I
-          am also familiar with other web technologies such as Node.js,
-          Express.js, and MongoDB. I am currently looking for a Software
-          Engineering internship to gain work experience in the field.
+    <div className="skills-section">
+      {/* Section Header */}
+      <div className="skills-section__header">
+        <h2 className="section-heading" id="skills-heading">
+          Skills & <span className="accent">Experience</span>
+        </h2>
+        <p className="section-subtitle">
+          I am a fourth year student at York University, pursuing Specialized
+          Honours BSc in Computer Science. I am a self-taught web developer and
+          have been working with React for over two years now. I am also
+          familiar with other web technologies such as Node.js, Express.js, and
+          MongoDB. I am currently looking for a Software Engineering internship
+          to gain work experience in the field.
         </p>
       </div>
 
-      <div className="app__skills-container">
-        <motion.div className="app__skills-list">
-          {skillss.map((skill) => (
+      <div className="skills-section__body">
+        {/* Skills Grid */}
+        <div className="skills-grid">
+          {skillss.map((skill, index) => (
             <motion.div
-              whileInView={{ opacity: [0, 1] }}
-              transition={{ duration: 0.5 }}
-              className="app__skills-item app__flex"
-              key={skill.name + "skills"}
+              className="skill-tile glass-card"
+              key={skill.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.06, duration: 0.4 }}
+              whileHover={{ y: -6, scale: 1.04 }}
+              id={`skill-${skill.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}
             >
-              <div
-                className="app__flex"
-                style={{ backgroundColor: skill.bgColor }}
-              >
+              <div className="skill-tile__icon">
                 <img src={skill.icon} alt={skill.name} />
               </div>
-              <p className="p-text">{skill.name}</p>
+              <span className="skill-tile__name">{skill.name}</span>
             </motion.div>
           ))}
-        </motion.div>
-        <div className="app__skills-exp">
-          <div className="app__skills-filter">
-            {["Expertise", "Work", "Education"].map((item, index) => (
-              <div
-                key={index}
+        </div>
+
+        {/* Experience Panel */}
+        <div className="experience-panel">
+          {/* Filter Tabs */}
+          <div className="experience-tabs">
+            {["Expertise", "Work", "Education"].map((item) => (
+              <button
+                key={item}
                 onClick={() => handleWorkFilter(item)}
-                className={`app__skills-filter-item app__flex ${
-                  activeFilter === item ? "item-active" : ""
+                className={`experience-tab ${
+                  activeFilter === item ? "experience-tab--active" : ""
                 }`}
+                id={`exp-tab-${item.toLowerCase()}`}
               >
-                <h2>{item}</h2>
-                <div className="app__skills-filter-under"></div>
-              </div>
+                {item}
+              </button>
             ))}
           </div>
-          <motion.div
-            animate={animateCard}
-            transition={{ duration: 0.1 }}
-            className="app__skills-exp-content"
-          >
-            {filterExperience.map((experience, index) => (
-              <motion.div
-                className="app__skills-exp-item"
-                key={
-                  experience.tags.includes("Expertise")
-                    ? index
-                    : experience.year
-                }
-              >
-                <div className="app__skills-exp-year">
-                  <p className="bold-text">
-                    {experience.tags.includes("Work")
-                      ? experience.works[0].name
-                      : experience.year}
-                  </p>
+
+          {/* Experience Items */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeFilter}
+              className="experience-list"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              {filterExperience.map((experience, index) => (
+                <div className="experience-item" key={index}>
+                  <div className="experience-item__marker">
+                    <div className="experience-item__dot" />
+                    {index < filterExperience.length - 1 && (
+                      <div className="experience-item__line" />
+                    )}
+                  </div>
+                  <div className="experience-item__content glass-card">
+                    <h4 className="experience-item__title">
+                      {experience.tags.includes("Work")
+                        ? experience.works[0].name
+                        : experience.year}
+                    </h4>
+                    {experience.works.map((work, wIndex) => (
+                      <div key={wIndex} className="experience-item__detail">
+                        <p className="experience-item__name">
+                          {experience.tags.includes("Work")
+                            ? experience.works[0].desc
+                            : work.name}
+                        </p>
+                        {work.desc && !experience.tags.includes("Work") && (
+                          <p className="experience-item__desc">{work.desc}</p>
+                        )}
+                        {experience.tags.includes("Work") && (
+                          <p className="experience-item__desc">
+                            {experience.year}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <motion.div className="app__skills-exp-works">
-                  {experience.works.map((work) => {
-                    idx++;
-                    return (
-                      <Fragment key={105 + idx}>
-                        <motion.div
-                          whileInView={{ opacity: [0, 1] }}
-                          transition={{ duration: 0.5 }}
-                          className={"app__skills-exp-work"}
-                          key={idx + 20}
-                        >
-                          <h4 className="bold-text" id={work.name}>
-                            {experience.tags.includes("Work")
-                              ? experience.works[0].desc
-                              : work.name}
-                          </h4>
-                          {work.desc && (
-                            <p className="p-text" id={work.name}>
-                              {experience.tags.includes("Work")
-                                ? experience.year
-                                : work.desc}
-                            </p>
-                          )}
-                        </motion.div>
-                      </Fragment>
-                    );
-                  })}
-                </motion.div>
-              </motion.div>
-            ))}
-          </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
 export default AppWrap(
-  MotionWrap(Skills, "app__skills"),
-  "skills",
-  "app__whitebg"
+  MotionWrap(Skills, "skills-section__wrapper"),
+  "skills"
 );
