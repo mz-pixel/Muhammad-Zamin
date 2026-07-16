@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AiFillGithub, AiFillYoutube } from "react-icons/ai";
 import { AppWrap, MotionWrap } from "../../wrapper";
@@ -10,13 +10,26 @@ const FILTERS = ["All", "WebApp", "Machine Learning", "Mobile Application"];
 
 const Work = () => {
   const [tag, setTag] = useState("All");
+  const [hoveredProject, setHoveredProject] = useState(null);
+  const [activeMobileProject, setActiveMobileProject] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
   const { triggerTransition } = usePageTransition();
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 1024);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const filtered = tag === "All"
     ? projects
     : projects.filter((p) => p.format === tag);
 
   const handleVisit = (e, url) => {
+    e.stopPropagation(); // Prevent trigger accordion change
     e.preventDefault();
     triggerTransition(() => window.open(url, "_blank"));
   };
@@ -36,7 +49,11 @@ const Work = () => {
         {FILTERS.map((f) => (
           <button
             key={f}
-            onClick={() => setTag(f)}
+            onClick={() => {
+              setTag(f);
+              setHoveredProject(null);
+              setActiveMobileProject(null);
+            }}
             className={`work-filter ${tag === f ? "work-filter--active" : ""}`}
             id={`work-filter-${f.toLowerCase().replace(/\s+/g, "-")}`}
           >
@@ -55,102 +72,150 @@ const Work = () => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
         >
-          {filtered.map((work, index) => (
-            <motion.article
-              className="project-card"
-              key={work.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              id={`project-${work.title.toLowerCase().replace(/\s+/g, "-")}`}
-            >
-              {/* ── Top row: index + title + type ── */}
-              <div className="project-card__top">
-                <span className="project-card__index">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3 className="project-card__title">{work.title}</h3>
-                <span className="project-card__type">{work.type}</span>
-              </div>
+          {filtered.map((work, index) => {
+            const isExpanded = isMobile
+              ? activeMobileProject === work.title
+              : hoveredProject?.title === work.title;
 
-              {/* ── Screenshot ── */}
-              <div className="project-card__image-wrapper">
-                <img
-                  src={work.img}
-                  alt={work.title}
-                  className="project-card__image"
-                />
-              </div>
+            return (
+              <motion.div
+                className={`project-row ${isExpanded ? "project-row--hovered" : ""}`}
+                key={work.title}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                onMouseEnter={() => !isMobile && setHoveredProject(work)}
+                onMouseLeave={() => !isMobile && setHoveredProject(null)}
+                onClick={() => {
+                  if (isMobile) {
+                    setActiveMobileProject((prev) => (prev === work.title ? null : work.title));
+                  }
+                }}
+                id={`project-${work.title.toLowerCase().replace(/\s+/g, "-")}`}
+              >
+                {/* ── Main row content ── */}
+                <div className="project-row__main">
+                  <div className="project-row__left">
+                    <span className="project-row__index">
+                      /{String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="project-row__title">{work.title}</h3>
+                  </div>
 
-              {/* ── Description ── */}
-              <p className="project-card__desc">{work.description}</p>
-
-              {/* ── Metadata row ── */}
-              <div className="project-card__meta">
-                <div className="project-card__meta-item">
-                  <span className="project-card__meta-label">Role</span>
-                  <span className="project-card__meta-value">{work.role}</span>
+                  <div className="project-row__meta-right">
+                    <span className="project-row__type">{work.type}</span>
+                    <div className="project-row__links">
+                      {work.codeLink && (
+                        <a
+                          href={work.codeLink}
+                          className="project-row__link"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label="GitHub"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <AiFillGithub />
+                        </a>
+                      )}
+                      {work.youtubeLink && (
+                        <a
+                          href={work.youtubeLink}
+                          className="project-row__link project-row__link--youtube"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label="Demo"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <AiFillYoutube />
+                        </a>
+                      )}
+                      {work.projectLink && (
+                        <a
+                          href={work.projectLink}
+                          className="project-row__link project-row__link--visit"
+                          onClick={(e) => handleVisit(e, work.projectLink)}
+                          aria-label="Visit site"
+                        >
+                          <span>Visit →</span>
+                        </a>
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <div className="project-card__meta-item">
-                  <span className="project-card__meta-label">Stack</span>
-                  <span className="project-card__meta-value tech-tag">
-                    {work.tags.join(" · ")}
-                  </span>
-                </div>
-                <div className="project-card__meta-item">
-                  <span className="project-card__meta-label">Year</span>
-                  <span className="project-card__meta-value">{work.year}</span>
-                </div>
-              </div>
 
-              {/* ── Impact ── */}
-              {work.impact && (
-                <div className="project-card__impact">
-                  <span className="project-card__impact-label">Impact</span>
-                  <p className="project-card__impact-text">{work.impact}</p>
-                </div>
-              )}
+                {/* ── Accordion expanded details ── */}
+                <motion.div
+                  className="project-row__details"
+                  initial={false}
+                  animate={{
+                    height: isExpanded ? "auto" : 0,
+                    opacity: isExpanded ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.35, ease: [0.76, 0, 0.24, 1] }}
+                  style={{ overflow: "hidden" }}
+                >
+                  <div className="project-row__details-inner">
+                    {isMobile && (
+                      <div className="project-row__mobile-image">
+                        <img
+                          src={work.img}
+                          alt={work.title}
+                          className="project-row__mobile-img"
+                        />
+                      </div>
+                    )}
+                    <p className="project-row__desc">{work.description}</p>
+                    
+                    <div className="project-row__subdetails">
+                      <div className="project-row__subdetail-item">
+                        <span className="project-row__subdetail-label">Role</span>
+                        <span className="project-row__subdetail-value">{work.role}</span>
+                      </div>
+                      <div className="project-row__subdetail-item">
+                        <span className="project-row__subdetail-label">Stack</span>
+                        <span className="project-row__subdetail-value tech-tag">
+                          {work.tags.join(" · ")}
+                        </span>
+                      </div>
+                      <div className="project-row__subdetail-item">
+                        <span className="project-row__subdetail-label">Year</span>
+                        <span className="project-row__subdetail-value">{work.year}</span>
+                      </div>
+                    </div>
 
-              {/* ── Links ── */}
-              <div className="project-card__links">
-                {work.codeLink && (
-                  <a
-                    href={work.codeLink}
-                    className="project-card__link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="GitHub"
-                  >
-                    <AiFillGithub />
-                    <span>GitHub</span>
-                  </a>
-                )}
-                {work.youtubeLink && (
-                  <a
-                    href={work.youtubeLink}
-                    className="project-card__link project-card__link--youtube"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Demo"
-                  >
-                    <AiFillYoutube />
-                    <span>Demo</span>
-                  </a>
-                )}
-                {work.projectLink && (
-                  <a
-                    href={work.projectLink}
-                    className="project-card__link project-card__link--visit"
-                    onClick={(e) => handleVisit(e, work.projectLink)}
-                    aria-label="Visit site"
-                  >
-                    <span>Visit →</span>
-                  </a>
-                )}
-              </div>
-            </motion.article>
-          ))}
+                    {work.impact && (
+                      <div className="project-row__impact">
+                        <span className="project-row__impact-label">Impact</span>
+                        <p className="project-row__impact-text">{work.impact}</p>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+                {/* ── Sibling Row Preview (positioned to the right, outside list container) ── */}
+                <AnimatePresence>
+                  {!isMobile && isExpanded && (
+                    <motion.div
+                      className="project-row__preview"
+                      initial={{ opacity: 0, filter: "blur(20px)", scale: 0.96 }}
+                      animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
+                      exit={{ opacity: 0, filter: "blur(20px)", scale: 0.96 }}
+                      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      <div className="project-row__preview-inner">
+                        <img
+                          src={work.img}
+                          alt={work.title}
+                          className="project-row__preview-image"
+                        />
+                        <div className="project-row__preview-overlay" />
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </AnimatePresence>
     </div>

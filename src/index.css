@@ -48,6 +48,7 @@
   /* Easing */
   --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-slow:   cubic-bezier(0.76, 0, 0.24, 1);
 
   /* Transition overlay colors */
   --transition-panel-bg:   #1A1714;
@@ -61,33 +62,33 @@
 
 /* ================================================================
    DARK MODE
-   Near-black warm charcoal — original editorial dark palette
+   Near-black obsidian and shadow — premium editorial dark palette
    ================================================================ */
 [data-theme="dark"] {
-  --bg:              #111010;
-  --bg-surface:      #181615;
-  --bg-surface-hover:#1D1A18;
+  --bg:              #151415;
+  --bg-surface:      #1c1b1c;
+  --bg-surface-hover:#242324;
 
-  --text-primary:    #EDE8DC;
-  --text-secondary:  #9A9186;
-  --text-muted:      #5C5650;
+  --text-primary:    #F1EADE;
+  --text-secondary:  #A19D9B;
+  --text-muted:      #595554;
 
-  --accent:          #A88B5B;
-  --accent-dim:      rgba(168, 139, 91, 0.18);
+  --accent:          #c4b59f;
+  --accent-dim:      rgba(196, 181, 159, 0.15);
 
-  --border:          rgba(237, 232, 220, 0.08);
-  --border-hover:    rgba(237, 232, 220, 0.14);
+  --border:          rgba(241, 234, 222, 0.08);
+  --border-hover:    rgba(241, 234, 222, 0.15);
 
   --cat-webapp:      #6A85A8;
   --cat-mobile:      #6A9B7E;
   --cat-ml:          #8B7A5E;
 
-  --transition-panel-bg:        #111010;
-  --transition-initials-color:  #EDE8DC;
+  --transition-panel-bg:        #151415;
+  --transition-initials-color:  #F1EADE;
 
-  --cursor-dot-color:  #EDE8DC;
-  --cursor-ring-color: rgba(237, 232, 220, 0.5);
-  --cursor-ring-hover: rgba(168, 139, 91, 0.6);
+  --cursor-dot-color:  #F1EADE;
+  --cursor-ring-color: rgba(241, 234, 222, 0.5);
+  --cursor-ring-hover: rgba(196, 181, 159, 0.6);
 }
 
 /* ================================================================
@@ -166,4 +167,25 @@ button {
 ::selection {
   background: var(--accent);
   color: var(--bg);
+}
+
+/* ===== Lenis Smooth Scroll Rules ===== */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis-scrolling iframe {
+  pointer-events: none;
 }

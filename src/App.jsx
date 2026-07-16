@@ -6,11 +6,34 @@ import PageTransition from "./components/PageTransition/PageTransition";
 import CustomCursor from "./components/CustomCursor/CustomCursor";
 import { usePageTransition } from "./components/PageTransition/PageTransitionContext";
 import { ThemeProvider } from "./context/ThemeContext";
+import Lenis from "lenis";
 import "./App.scss";
 
 // Inner app — needs access to transition context for first-load animation
 const AppInner = () => {
   const { triggerTransition } = usePageTransition();
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 2.0,
+    });
+
+    let rafId;
+    function raf(time) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+    rafId = requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
 
   useEffect(() => {
     // Play once per session on first visit
