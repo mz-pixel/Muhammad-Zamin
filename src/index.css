@@ -1,47 +1,98 @@
-/* ===== Design Tokens ===== */
-:root {
-  /* Colors */
-  --bg-primary: #0a0a1a;
-  --bg-secondary: #111128;
-  --bg-card: rgba(255, 255, 255, 0.04);
-  --bg-card-hover: rgba(255, 255, 255, 0.08);
-  --glass-bg: rgba(255, 255, 255, 0.06);
-  --glass-border: rgba(255, 255, 255, 0.1);
+/* ===== Google Fonts ===== */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
-  --accent: #6c63ff;
-  --accent-light: #8b83ff;
-  --accent-glow: rgba(108, 99, 255, 0.35);
-  --accent-secondary: #ff6b6b;
-  --accent-secondary-glow: rgba(255, 107, 107, 0.3);
+/* ================================================================
+   LIGHT MODE (default)
+   Warm parchment — editorial magazine feel
+   ================================================================ */
+:root,
+[data-theme="light"] {
+  /* Backgrounds */
+  --bg:              #F4EFE6;
+  --bg-surface:      #EDE6D8;
+  --bg-surface-hover:#E5DDD0;
 
-  --text-primary: #f0f0f5;
-  --text-secondary: #a0a0b8;
-  --text-muted: #6a6a80;
+  /* Text */
+  --text-primary:    #1A1714;
+  --text-secondary:  #5A5248;
+  --text-muted:      #9A9186;
 
-  --white: #ffffff;
-  --black: #000000;
+  /* Accent (warm gold — deeper on light for contrast) */
+  --accent:          #8B6F3E;
+  --accent-dim:      rgba(139, 111, 62, 0.12);
+
+  /* Borders */
+  --border:          rgba(26, 23, 20, 0.1);
+  --border-hover:    rgba(26, 23, 20, 0.2);
+
+  /* Project category accents (2px left border on cards) */
+  --cat-webapp:      #4A6FA8;
+  --cat-mobile:      #3A7A5A;
+  --cat-ml:          #7A6040;
 
   /* Typography */
-  --font-heading: "Space Grotesk", sans-serif;
-  --font-body: "Inter", sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-body:  'DM Sans', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
 
   /* Spacing */
-  --section-padding: 6rem 2rem;
+  --section-padding:        6rem 2rem;
   --section-padding-mobile: 4rem 1.25rem;
-  --container-max: 1200px;
+  --container-max:          1100px;
 
-  /* Borders & Radius */
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --radius-pill: 100px;
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
 
-  /* Transitions */
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Easing */
+  --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Transition overlay colors */
+  --transition-panel-bg:   #1A1714;
+  --transition-initials-color: #F4EFE6;
+
+  /* Cursor colors */
+  --cursor-dot-color:  #1A1714;
+  --cursor-ring-color: rgba(26, 23, 20, 0.45);
+  --cursor-ring-hover: rgba(139, 111, 62, 0.55);
 }
 
-/* ===== Global Reset ===== */
+/* ================================================================
+   DARK MODE
+   Near-black warm charcoal — original editorial dark palette
+   ================================================================ */
+[data-theme="dark"] {
+  --bg:              #111010;
+  --bg-surface:      #181615;
+  --bg-surface-hover:#1D1A18;
+
+  --text-primary:    #EDE8DC;
+  --text-secondary:  #9A9186;
+  --text-muted:      #5C5650;
+
+  --accent:          #A88B5B;
+  --accent-dim:      rgba(168, 139, 91, 0.18);
+
+  --border:          rgba(237, 232, 220, 0.08);
+  --border-hover:    rgba(237, 232, 220, 0.14);
+
+  --cat-webapp:      #6A85A8;
+  --cat-mobile:      #6A9B7E;
+  --cat-ml:          #8B7A5E;
+
+  --transition-panel-bg:        #111010;
+  --transition-initials-color:  #EDE8DC;
+
+  --cursor-dot-color:  #EDE8DC;
+  --cursor-ring-color: rgba(237, 232, 220, 0.5);
+  --cursor-ring-hover: rgba(168, 139, 91, 0.6);
+}
+
+/* ================================================================
+   GLOBAL RESET
+   ================================================================ */
 *,
 *::before,
 *::after {
@@ -58,10 +109,25 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--bg-primary);
+  background-color: var(--bg);
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
+  cursor: none;
+  transition: background-color 0.35s var(--ease-in-out),
+              color 0.35s var(--ease-in-out);
+}
+
+/* ===== Paper Grain Texture ===== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9990;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
 }
 
 a {
@@ -80,38 +146,24 @@ img {
 
 button {
   font-family: inherit;
-  cursor: pointer;
+  cursor: none;
   border: none;
   background: none;
   color: inherit;
 }
 
 /* ===== Custom Scrollbar ===== */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
-
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb {
   background: var(--accent);
-  border-radius: 4px;
+  border-radius: 3px;
 }
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-light);
-}
-
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--accent) var(--bg-primary);
-}
+::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }
+* { scrollbar-width: thin; scrollbar-color: var(--accent) var(--bg); }
 
 /* ===== Selection ===== */
 ::selection {
   background: var(--accent);
-  color: var(--white);
+  color: var(--bg);
 }

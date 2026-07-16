@@ -1,0 +1,40 @@
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.page-transition__panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background: var(--transition-panel-bg);
+  will-change: transform;
+
+  &--left {
+    left: 0;
+  }
+
+  &--right {
+    right: 0;
+  }
+}
+
+.page-transition__initials {
+  position: relative;
+  z-index: 1;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(5rem, 12vw, 10rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--transition-initials-color);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  user-select: none;
+}

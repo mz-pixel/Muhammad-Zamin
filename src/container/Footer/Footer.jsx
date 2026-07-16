@@ -1,85 +1,90 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { AppWrap, MotionWrap } from "../../wrapper";
-import SocialMedia from "../../components/SocialMedia";
+import { BsGithub, BsLinkedin, BsYoutube } from "react-icons/bs";
+import { usePageTransition } from "../../components/PageTransition/PageTransitionContext";
 import "./Footer.scss";
-import { HiMail, HiDocument } from "react-icons/hi";
-import { BsCheckCircleFill } from "react-icons/bs";
 
 const Footer = () => {
-  const [copied, setCopied] = useState(false);
+  const { triggerTransition } = usePageTransition();
 
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText("zamin@my.yorku.ca");
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    } catch (err) {
-      console.error("Failed to copy email: ", err);
-    }
+  const handleEmail = (e) => {
+    e.preventDefault();
+    window.location.href = "mailto:zamin@my.yorku.ca";
   };
 
   return (
     <div className="footer-section">
-      <div className="footer-section__header">
-        <h2 className="section-heading" id="footer-heading">
-          Let's <span className="accent">Connect</span>
-        </h2>
-        <p className="section-subtitle" style={{ textAlign: "center" }}>
-          If you find my work impressive, I'd love to discuss further. Let's
-          build something great together!
-        </p>
-      </div>
+      {/* Headline */}
+      <motion.h2
+        className="footer-section__headline"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        id="footer-heading"
+      >
+        Let's build something
+        <br />
+        <em>meaningful.</em>
+      </motion.h2>
 
-      <div className="footer-section__cards">
-        {/* Email card */}
-        <motion.button
-          className="footer-card glass-card"
-          onClick={copyToClipboard}
-          whileHover={{ y: -4 }}
-          whileTap={{ scale: 0.98 }}
-          id="footer-email-card"
+      {/* Email */}
+      <motion.a
+        href="mailto:zamin@my.yorku.ca"
+        className="footer-section__email"
+        onClick={handleEmail}
+        id="footer-email"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, delay: 0.15 }}
+      >
+        zamin@my.yorku.ca →
+      </motion.a>
+
+      {/* Social */}
+      <motion.div
+        className="footer-section__social"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, delay: 0.25 }}
+      >
+        <a
+          href="https://github.com/mz-pixel"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="footer-social-link"
+          aria-label="GitHub"
+          id="footer-github"
         >
-          <div className="footer-card__icon">
-            {copied ? (
-              <BsCheckCircleFill className="footer-card__check" />
-            ) : (
-              <HiMail />
-            )}
-          </div>
-          <div className="footer-card__text">
-            <span className="footer-card__label">
-              {copied ? "Copied!" : "Email"}
-            </span>
-            <span className="footer-card__value">zamin@my.yorku.ca</span>
-          </div>
-        </motion.button>
-
-        {/* Resume card */}
-        <motion.a
-          href="/Muhammad Zamin resume.pdf"
-          className="footer-card footer-card--resume glass-card"
-          whileHover={{ y: -4 }}
-          whileTap={{ scale: 0.98 }}
-          id="footer-resume-card"
+          <BsGithub />
+          <span>GitHub</span>
+        </a>
+        <a
+          href="https://www.linkedin.com/in/muhammad-zamin-4b4998209/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="footer-social-link"
+          aria-label="LinkedIn"
+          id="footer-linkedin"
         >
-          <div className="footer-card__icon">
-            <HiDocument />
-          </div>
-          <div className="footer-card__text">
-            <span className="footer-card__label">Resume</span>
-            <span className="footer-card__value">Download PDF</span>
-          </div>
-        </motion.a>
-      </div>
-
-      {/* Social links */}
-      <div className="footer-section__social">
-        <SocialMedia size="lg" />
-      </div>
-
-      {/* Separator */}
-      <div className="footer-section__separator" />
+          <BsLinkedin />
+          <span>LinkedIn</span>
+        </a>
+        <a
+          href="https://www.youtube.com/@mz-pixel"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="footer-social-link"
+          aria-label="YouTube"
+          id="footer-youtube"
+        >
+          <BsYoutube />
+          <span>YouTube</span>
+        </a>
+      </motion.div>
     </div>
   );
 };

@@ -1,100 +1,89 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { AppWrap } from "../../wrapper";
 import { images } from "../../constants";
 import SocialMedia from "../../components/SocialMedia";
+import { usePageTransition } from "../../components/PageTransition/PageTransitionContext";
 import "./Header.scss";
-import { FaLocationDot } from "react-icons/fa6";
-import { HiDocument } from "react-icons/hi";
-import { BsArrowDown } from "react-icons/bs";
-
-const roles = ["Web Developer", "Software Engineer", "Full-Stack Dev"];
 
 const Header = () => {
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [displayText, setDisplayText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
+  const { triggerTransition } = usePageTransition();
 
-  useEffect(() => {
-    const currentRole = roles[roleIndex];
-    let timeout;
+  const scrollToWork = (e) => {
+    e.preventDefault();
+    const el = document.getElementById("work");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
 
-    if (!isDeleting && displayText === currentRole) {
-      timeout = setTimeout(() => setIsDeleting(true), 2000);
-    } else if (isDeleting && displayText === "") {
-      setIsDeleting(false);
-      setRoleIndex((prev) => (prev + 1) % roles.length);
-    } else {
-      timeout = setTimeout(
-        () => {
-          setDisplayText(
-            isDeleting
-              ? currentRole.substring(0, displayText.length - 1)
-              : currentRole.substring(0, displayText.length + 1)
-          );
-        },
-        isDeleting ? 40 : 80
-      );
-    }
-
-    return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, roleIndex]);
+  const handleResume = (e) => {
+    e.preventDefault();
+    triggerTransition(() => window.open("/Muhammad Zamin resume.pdf", "_blank"));
+  };
 
   return (
     <div className="hero">
+      {/* ── Left: Text ── */}
       <motion.div
         className="hero__content"
-        initial={{ x: -60, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="hero__greeting">
-          <span className="hero__greeting-line" />
-          <span className="hero__greeting-text">Hello, I'm</span>
-        </div>
-
-        <h1 className="hero__name" id="hero-name">
-          Muhammad<br />
-          <span className="text-gradient">Zamin</span>
+        {/* Statement headline */}
+        <h1 className="hero__statement" id="hero-statement">
+          Building reliable
+          <br />
+          software for
+          <br />
+          <em>real people.</em>
         </h1>
 
-        <div className="hero__role">
-          <span className="hero__role-prefix">I'm a </span>
-          <span className="hero__role-typed" id="hero-role">
-            {displayText}
-            <span className="hero__cursor">|</span>
-          </span>
+        {/* Byline: name */}
+        <div className="hero__byline">
+          <span className="hero__name">Muhammad Zamin</span>
+          <span className="hero__separator">·</span>
+          <span className="hero__role">Full Stack Developer</span>
         </div>
 
-        <div className="hero__location">
-          <FaLocationDot />
-          <span>Toronto, Canada</span>
+        {/* Location */}
+        <div className="hero__meta">
+          <span className="hero__location">Toronto, Canada</span>
         </div>
 
+        {/* Social */}
         <div className="hero__social">
-          <SocialMedia size="lg" />
+          <SocialMedia size="md" />
         </div>
 
+        {/* CTA */}
         <div className="hero__cta">
-          <a href="#work" className="btn-gradient" id="hero-cta-work">
-            View My Work
-            <BsArrowDown />
+          <a
+            href="#work"
+            className="btn-editorial btn-editorial--accent"
+            id="hero-cta-work"
+            onClick={scrollToWork}
+          >
+            Selected Work →
           </a>
-          <a href="/Muhammad Zamin resume.pdf" className="btn-outline" id="hero-cta-resume">
-            <HiDocument />
-            Resume
+          <a
+            href="/Muhammad Zamin resume.pdf"
+            className="btn-editorial"
+            id="hero-cta-resume"
+            onClick={handleResume}
+          >
+            Resume →
           </a>
         </div>
       </motion.div>
 
+      {/* ── Right: Portrait ── */}
       <motion.div
         className="hero__image-wrapper"
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="hero__image-ring">
-          <div className="hero__image-glow" />
+        <div className="hero__image-frame">
           <img
             src={images.profile}
             alt="Muhammad Zamin"
@@ -102,22 +91,6 @@ const Header = () => {
             id="hero-profile-image"
           />
         </div>
-        {/* Floating accent orbs */}
-        <motion.div
-          className="hero__orb hero__orb--1"
-          animate={{ y: [0, -15, 0], x: [0, 8, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="hero__orb hero__orb--2"
-          animate={{ y: [0, 12, 0], x: [0, -10, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="hero__orb hero__orb--3"
-          animate={{ y: [0, -10, 0], x: [0, -6, 0] }}
-          transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-        />
       </motion.div>
     </div>
   );

@@ -12,6 +12,7 @@ import javascript from "../assets/javascript.png";
 import mu5 from "../assets/mu5.png";
 import node from "../assets/node.png";
 import python from "../assets/python.png";
+import hayaat from "../assets/hayaat.png";
 import todo from "../assets/todo.png";
 import yelp from "../assets/yelp.png";
 import react from "../assets/react.png";
@@ -61,6 +62,7 @@ const images = {
   html,
   javascript,
   mu5,
+  hayaat,
   node,
   python,
   todo,
