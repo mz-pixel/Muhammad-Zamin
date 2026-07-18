@@ -7,28 +7,33 @@
    ================================================================ */
 :root,
 [data-theme="light"] {
-  /* Backgrounds */
-  --bg:              #F4EFE6;
-  --bg-surface:      #EDE6D8;
-  --bg-surface-hover:#E5DDD0;
+  /* Frame & Background Gap */
+  --frame-gap:       8px;
+  --frame-radius:    16px;
 
-  /* Text */
-  --text-primary:    #1A1714;
-  --text-secondary:  #5A5248;
-  --text-muted:      #9A9186;
+  /* Backgrounds (Premium Silver & Emerald) */
+  --bg:              #E9ECEF; /* Inner content card background */
+  --bg-outer:        #096A47; /* Outer viewport frame background */
+  --bg-surface:      #DCE1E6;
+  --bg-surface-hover:#CFD5DB;
 
-  /* Accent (warm gold — deeper on light for contrast) */
-  --accent:          #8B6F3E;
-  --accent-dim:      rgba(139, 111, 62, 0.12);
+  /* Text (Slate/Charcoal) */
+  --text-primary:    #12181B;
+  --text-secondary:  #48545A;
+  --text-muted:      #78868C;
+
+  /* Accent (Metallic Emerald Green) */
+  --accent:          #096A47;
+  --accent-dim:      rgba(9, 106, 71, 0.12);
 
   /* Borders */
-  --border:          rgba(26, 23, 20, 0.1);
-  --border-hover:    rgba(26, 23, 20, 0.2);
+  --border:          rgba(18, 24, 27, 0.08);
+  --border-hover:    rgba(18, 24, 27, 0.15);
 
-  /* Project category accents (2px left border on cards) */
-  --cat-webapp:      #4A6FA8;
-  --cat-mobile:      #3A7A5A;
-  --cat-ml:          #7A6040;
+  /* Project category accents */
+  --cat-webapp:      #2B5876;
+  --cat-mobile:      #096A47;
+  --cat-ml:          #576B61;
 
   /* Typography */
   --font-serif: 'Cormorant Garamond', Georgia, serif;
@@ -51,44 +56,52 @@
   --ease-slow:   cubic-bezier(0.76, 0, 0.24, 1);
 
   /* Transition overlay colors */
-  --transition-panel-bg:   #1A1714;
-  --transition-initials-color: #F4EFE6;
+  --transition-panel-bg:   #096A47;
+  --transition-initials-color: #E9ECEF;
 
   /* Cursor colors */
-  --cursor-dot-color:  #1A1714;
-  --cursor-ring-color: rgba(26, 23, 20, 0.45);
-  --cursor-ring-hover: rgba(139, 111, 62, 0.55);
+  --cursor-dot-color:  #12181B;
+  --cursor-ring-color: rgba(18, 24, 27, 0.45);
+  --cursor-ring-hover: rgba(9, 106, 71, 0.55);
 }
 
 /* ================================================================
    DARK MODE
-   Near-black obsidian and shadow — premium editorial dark palette
+   Green Obsidian and Shadow — premium dark palette
    ================================================================ */
 [data-theme="dark"] {
-  --bg:              #151415;
-  --bg-surface:      #1c1b1c;
-  --bg-surface-hover:#242324;
+  /* Backgrounds (Dark Obsidian Green & Silver) */
+  --bg:              #07150E; /* Inner content card background */
+  --bg-outer:        #DCE2E7; /* Outer viewport frame background */
+  --bg-surface:      #0F241A;
+  --bg-surface-hover:#173426;
 
-  --text-primary:    #F1EADE;
-  --text-secondary:  #A19D9B;
-  --text-muted:      #595554;
+  /* Text (Premium Silver) */
+  --text-primary:    #EDF2F4;
+  --text-secondary:  #9EB0A6;
+  --text-muted:      #5C7368;
 
-  --accent:          #c4b59f;
-  --accent-dim:      rgba(196, 181, 159, 0.15);
+  /* Accent (Premium Silver) */
+  --accent:          #DCE2E7;
+  --accent-dim:      rgba(220, 226, 231, 0.15);
 
-  --border:          rgba(241, 234, 222, 0.08);
-  --border-hover:    rgba(241, 234, 222, 0.15);
+  /* Borders */
+  --border:          rgba(237, 242, 244, 0.08);
+  --border-hover:    rgba(237, 242, 244, 0.15);
 
-  --cat-webapp:      #6A85A8;
-  --cat-mobile:      #6A9B7E;
-  --cat-ml:          #8B7A5E;
+  /* Project category accents */
+  --cat-webapp:      #7EA8C4;
+  --cat-mobile:      #A1E5C2;
+  --cat-ml:          #A3BCA9;
 
-  --transition-panel-bg:        #151415;
-  --transition-initials-color:  #F1EADE;
+  /* Transition overlay colors */
+  --transition-panel-bg:        #07150E;
+  --transition-initials-color:  #DCE2E7;
 
-  --cursor-dot-color:  #F1EADE;
-  --cursor-ring-color: rgba(241, 234, 222, 0.5);
-  --cursor-ring-hover: rgba(196, 181, 159, 0.6);
+  /* Cursor colors */
+  --cursor-dot-color:  #EDF2F4;
+  --cursor-ring-color: rgba(237, 242, 244, 0.5);
+  --cursor-ring-hover: rgba(220, 226, 231, 0.6);
 }
 
 /* ================================================================
@@ -110,7 +123,7 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--bg);
+  background-color: var(--bg-outer);
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
@@ -188,4 +201,25 @@ html.lenis, html.lenis body {
 
 .lenis-scrolling iframe {
   pointer-events: none;
+}
+
+/* ===== Viewport Frame Mask (Squircle background card effect) ===== */
+.viewport-frame {
+  position: fixed;
+  top: var(--frame-gap, 8px);
+  bottom: var(--frame-gap, 8px);
+  left: var(--frame-gap, 8px);
+  right: var(--frame-gap, 8px);
+  border-radius: var(--frame-radius, 16px);
+  box-shadow: 0 0 0 100vmax var(--bg-outer);
+  pointer-events: none;
+  z-index: 9995;
+  transition: box-shadow 0.35s var(--ease-in-out);
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --frame-gap: 4px;
+    --frame-radius: 8px;
+  }
 }

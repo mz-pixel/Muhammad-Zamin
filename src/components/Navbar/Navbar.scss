@@ -1,26 +1,32 @@
-/* ===== Navbar ===== */
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: var(--frame-gap, 8px);
+  left: var(--frame-gap, 8px);
+  right: var(--frame-gap, 8px);
   z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1.4rem 2.5rem;
-  transition: padding 0.4s var(--ease-out), background 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
+  border-radius: var(--frame-radius, 28px) var(--frame-radius, 28px) 0 0; /* Aligns with squircle top corners, straight bottom */
+  transition: padding 0.4s var(--ease-out), background 0.4s var(--ease-out), border-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
 
   &--scrolled {
-    padding: 1rem 2.5rem;
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border);
+    padding: 0.85rem 2rem;
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
   }
 
   @media screen and (max-width: 768px) {
     padding: 1.2rem 1.5rem;
+    border-radius: var(--frame-radius, 16px) var(--frame-radius, 16px) 0 0; /* Aligns with mobile squircle top corners, straight bottom */
+    
+    &--scrolled {
+      padding: 0.75rem 1.2rem;
+    }
   }
 }
 
@@ -221,5 +227,8 @@
 
   .theme-toggle {
     color: var(--text-secondary);
+    display: inline-flex !important;
+    width: auto !important;
+    align-items: center !important;
   }
 }

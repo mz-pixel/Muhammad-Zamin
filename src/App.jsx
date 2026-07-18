@@ -48,6 +48,7 @@ const AppInner = () => {
 
   return (
     <div className="app">
+      <div className="viewport-frame" />
       <CustomCursor />
       <PageTransition />
       <Navbar />
