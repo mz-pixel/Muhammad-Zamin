@@ -29,7 +29,7 @@ const initialsVariants = {
 };
 
 const PageTransition = () => {
-  const { isAnimating, onAnimationMidpoint, onAnimationComplete } = usePageTransition();
+  const { isAnimating, isFirstLoad, onAnimationMidpoint, onAnimationComplete } = usePageTransition();
 
   useEffect(() => {
     if (!isAnimating) return;
@@ -49,7 +49,7 @@ const PageTransition = () => {
           <motion.div
             className="page-transition__panel page-transition__panel--left"
             variants={panelVariants.left}
-            initial="hidden"
+            initial={isFirstLoad ? "visible" : "hidden"}
             animate="visible"
             exit="exit"
           />
@@ -57,7 +57,7 @@ const PageTransition = () => {
           <motion.div
             className="page-transition__panel page-transition__panel--right"
             variants={panelVariants.right}
-            initial="hidden"
+            initial={isFirstLoad ? "visible" : "hidden"}
             animate="visible"
             exit="exit"
           />
@@ -65,7 +65,7 @@ const PageTransition = () => {
           <motion.span
             className="page-transition__initials"
             variants={initialsVariants}
-            initial="hidden"
+            initial={isFirstLoad ? "visible" : "hidden"}
             animate="visible"
             exit="exit"
           >

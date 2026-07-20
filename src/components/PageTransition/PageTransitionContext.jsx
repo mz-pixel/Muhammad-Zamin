@@ -9,7 +9,8 @@ export const usePageTransition = () => {
 };
 
 export const PageTransitionProvider = ({ children }) => {
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(true);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [pendingCallback, setPendingCallback] = useState(null);
 
   /**
@@ -32,11 +33,12 @@ export const PageTransitionProvider = ({ children }) => {
 
   const onAnimationComplete = useCallback(() => {
     setIsAnimating(false);
+    setIsFirstLoad(false);
   }, []);
 
   return (
     <PageTransitionContext.Provider
-      value={{ isAnimating, triggerTransition, onAnimationMidpoint, onAnimationComplete }}
+      value={{ isAnimating, isFirstLoad, triggerTransition, onAnimationMidpoint, onAnimationComplete }}
     >
       {children}
     </PageTransitionContext.Provider>

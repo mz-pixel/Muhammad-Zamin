@@ -75,7 +75,7 @@ const Footer = () => {
           </motion.span>
 
           <motion.a
-            href="https://instagram.com/mz_pixel"
+            href="https://instagram.com/muhammad.z.j"
             target="_blank"
             rel="noopener noreferrer"
             className="footer-section__instagram"
