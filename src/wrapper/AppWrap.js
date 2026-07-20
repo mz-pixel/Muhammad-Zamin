@@ -2,14 +2,11 @@ import React from "react";
 
 const AppWrap = (Component, idName, classNames) =>
   function HOC() {
-    const date = new Date();
-    const year = date.getFullYear();
+    // const date = new Date();
+    // const year = date.getFullYear();
 
     return (
-      <section
-        id={idName}
-        className={`app__section ${classNames || ""}`}
-      >
+      <section id={idName} className={`app__section ${classNames || ""}`}>
         <div className="app__section-inner">
           <Component />
           {idName === "contact" && (

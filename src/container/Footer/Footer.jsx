@@ -2,11 +2,11 @@ import React from "react";
 import { motion } from "framer-motion";
 import { AppWrap, MotionWrap } from "../../wrapper";
 import { BsGithub, BsLinkedin, BsYoutube, BsFileText } from "react-icons/bs";
-import { usePageTransition } from "../../components/PageTransition/PageTransitionContext";
+// import { usePageTransition } from "../../components/PageTransition/PageTransitionContext";
 import "./Footer.scss";
 
 const Footer = () => {
-  const { triggerTransition } = usePageTransition();
+  // const { triggerTransition } = usePageTransition();
 
   const handleEmail = (e) => {
     e.preventDefault();
