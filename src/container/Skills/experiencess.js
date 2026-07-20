@@ -39,6 +39,14 @@ let experiencess = [
       },
     ],
     year: "B.Sc. (Specialized Hons.) Computer Science",
+    courses: [
+      { code: "EECS 3404", name: "Applied Machine Learning" },
+      { code: "EECS 3421", name: "Database Systems" },
+      { code: "EECS 3311", name: "Software Design" },
+      { code: "EECS 3101", name: "Design & Analysis of Algorithms" },
+      { code: "EECS 2030", name: "Advanced OOP" },
+      { code: "EECS 2011", name: "Data Structures" },
+    ],
   },
   {
     tags: ["Education"],

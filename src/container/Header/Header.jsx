@@ -29,20 +29,14 @@ const Header = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
-        {/* Statement headline */}
-        <h1 className="hero__statement" id="hero-statement">
-          Building reliable
-          <br />
-          software for
-          <br />
-          <em>real people.</em>
-        </h1>
-
-        {/* Byline: name */}
-        <div className="hero__byline">
-          <span className="hero__name">Muhammad Zamin</span>
-          <span className="hero__separator">·</span>
-          <span className="hero__role">Full Stack Developer</span>
+        {/* Hero Intro */}
+        <div className="hero__intro">
+          <h1 className="hero__name" id="hero-name">
+            Muhammad Zamin
+          </h1>
+          <div className="hero__role" id="hero-role">
+            Full Stack Developer
+          </div>
         </div>
 
         {/* Location */}

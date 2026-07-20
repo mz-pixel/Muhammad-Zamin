@@ -9,16 +9,36 @@ const CustomCursor = () => {
   const mouse   = useRef({ x: -100, y: -100 });
   const ring    = useRef({ x: -100, y: -100 });
   const rafId   = useRef(null);
-  const [hovered, setHovered] = useState(false);
+  const [hovered, setHovered]   = useState(false);
+  const [onNavbar, setOnNavbar] = useState(false);
 
   useEffect(() => {
     // Hide on touch devices
     if (window.matchMedia("(hover: none)").matches) return;
 
+    let navbarEl = null;
+
     const onMouseMove = (e) => {
       mouse.current = { x: e.clientX, y: e.clientY };
       if (dotRef.current) {
         dotRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      }
+
+      if (!navbarEl) {
+        navbarEl = document.querySelector(".navbar");
+      }
+
+      if (navbarEl) {
+        const rect = navbarEl.getBoundingClientRect();
+        const inside = (
+          e.clientX >= rect.left &&
+          e.clientX <= rect.right &&
+          e.clientY >= rect.top &&
+          e.clientY <= rect.bottom
+        );
+        setOnNavbar(inside);
+      } else {
+        setOnNavbar(false);
       }
     };
 
@@ -64,8 +84,8 @@ const CustomCursor = () => {
 
   return (
     <>
-      <div ref={dotRef}  className="cursor-dot" />
-      <div ref={ringRef} className={`cursor-ring ${hovered ? "cursor-ring--hover" : ""}`} />
+      <div ref={dotRef}  className={`cursor-dot ${onNavbar ? "cursor-dot--navbar" : ""}`} />
+      <div ref={ringRef} className={`cursor-ring ${hovered ? "cursor-ring--hover" : ""} ${onNavbar ? "cursor-ring--navbar" : ""}`} />
     </>
   );
 };

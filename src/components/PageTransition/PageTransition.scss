@@ -1,7 +1,7 @@
 .page-transition {
   position: fixed;
   inset: 0;
-  z-index: 9999;
+  z-index: 15000;
   pointer-events: all;
   display: flex;
   align-items: center;
@@ -29,7 +29,7 @@
 .page-transition__initials {
   position: relative;
   z-index: 1;
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-serif);
   font-size: clamp(5rem, 12vw, 10rem);
   font-weight: 300;
   font-style: italic;

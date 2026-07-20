@@ -1,17 +1,52 @@
 .app {
-  position: relative;
-  min-height: 100vh;
+  position: fixed;
+  top: var(--navbar-height);
+  bottom: var(--frame-gap, 8px);
+  left: var(--frame-gap, 8px);
+  right: var(--frame-gap, 8px);
   background: var(--bg);
+  overflow: hidden;
+  border-radius: 0 0 var(--frame-radius, 16px) var(--frame-radius, 16px);
+
+  @media screen and (max-width: 768px) {
+    bottom: var(--frame-gap, 4px);
+    left: var(--frame-gap, 4px);
+    right: var(--frame-gap, 4px);
+    border-radius: 0 0 var(--frame-radius, 8px) var(--frame-radius, 8px);
+  }
+}
+
+.app__scroll-container {
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 4px;
+  right: 4px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  @media screen and (max-width: 768px) {
+    top: 8px;
+    bottom: 8px;
+    left: 4px;
+    right: 4px;
+  }
 }
 
 /* ===== Section Container ===== */
 .app__section {
   position: relative;
   width: 100%;
+  min-height: calc(100vh - var(--navbar-height) - var(--frame-gap, 8px) * 2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: var(--section-padding);
   overflow: hidden;
+  scroll-margin-top: var(--navbar-height);
 
   @media screen and (max-width: 768px) {
+    min-height: calc(100vh - var(--navbar-height) - var(--frame-gap, 4px) * 2);
     padding: var(--section-padding-mobile);
   }
 }
@@ -22,7 +57,7 @@
 
 .app__section-inner {
   width: 100%;
-  max-width: var(--container-max);
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -60,7 +95,10 @@
   background: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  transition: background 0.3s var(--ease-out), border-color 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+  transition:
+    background 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out);
 
   &:hover {
     background: var(--bg-surface-hover);
@@ -85,7 +123,10 @@
   border-radius: var(--radius-sm);
   text-decoration: none;
   cursor: none;
-  transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    color 0.3s ease,
+    background 0.3s ease;
 
   &:hover {
     border-color: var(--border-hover);

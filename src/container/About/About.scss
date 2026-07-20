@@ -2,7 +2,6 @@
 .about-section {
   width: 100%;
   padding-top: 0;
-  border-top: 1px solid var(--border);
 }
 
 .about-section__inner {
@@ -47,3 +46,121 @@
     font-size: 0.95rem;
   }
 }
+
+/* Education section layout (matching skills section styling) */
+.about-education {
+  margin-top: 3rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.exp-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.exp-col__label {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+}
+
+.exp-col__rule {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 1rem;
+}
+
+.exp-entry {
+  margin-bottom: 1.25rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.exp-entry__title {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.4;
+  margin-bottom: 0.2rem;
+}
+
+.exp-entry__sub {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.exp-entry__courses {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.exp-entry__courses-label {
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+
+.exp-entry__courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+
+  @media screen and (max-width: 580px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.exp-entry__course-item {
+  font-family: var(--font-body);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  transition:
+    border-color 0.3s var(--ease-out),
+    background 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out);
+
+  &:hover {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+    transform: translateY(-1px);
+  }
+}
+
+.exp-entry__course-code {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+
+  .exp-entry__course-item:hover & {
+    color: var(--accent);
+  }
+}
+
+.exp-entry__course-name {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+

@@ -15,7 +15,6 @@ const groupBy = (arr, key) =>
 
 const CATEGORIES = ["Frontend", "Backend", "Databases & Tools"];
 
-const education = experiencess.filter((e) => e.tags.includes("Education"));
 const work      = experiencess.filter((e) => e.tags.includes("Work"));
 
 const Skills = () => {
@@ -86,33 +85,13 @@ const Skills = () => {
       <div className="experience-section">
         <span className="section-label">Experience</span>
         <div className="experience-cols">
-          {/* Education */}
-          <motion.div
-            className="exp-col"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="exp-col__label">Education</div>
-            <div className="exp-col__rule" />
-            {education.map((e, i) => (
-              <div className="exp-entry" key={i}>
-                <div className="exp-entry__title">{e.year}</div>
-                {e.works.map((w, wi) => (
-                  <div key={wi} className="exp-entry__sub">{w.name}</div>
-                ))}
-              </div>
-            ))}
-          </motion.div>
-
           {/* Work */}
           <motion.div
             className="exp-col"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.45, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="exp-col__label">Work</div>
             <div className="exp-col__rule" />

@@ -1,9 +1,10 @@
 /* ===== Hero Section ===== */
 #home {
-  min-height: 100vh;
+  min-height: calc(100vh - var(--navbar-height) - var(--frame-gap, 8px) * 2);
   display: flex;
   align-items: center;
-  padding-top: 6rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .hero {
@@ -28,46 +29,30 @@
   gap: 1.5rem;
 }
 
-/* Statement headline */
-.hero__statement {
-  font-family: var(--font-serif);
-  font-size: clamp(3rem, 7.5vw, 6.5rem);
-  font-weight: 300;
-  line-height: 1.08;
-  letter-spacing: -0.01em;
-  color: var(--text-primary);
-
-  em {
-    font-style: italic;
-    color: var(--accent);
-  }
-}
-
-/* Name byline */
-.hero__byline {
+/* Hero Intro */
+.hero__intro {
   display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .hero__name {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: 500;
+  font-family: var(--font-serif);
+  font-size: clamp(3.2rem, 7.8vw, 5.8rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
   color: var(--text-primary);
-  letter-spacing: 0.01em;
-}
-
-.hero__separator {
-  color: var(--border-hover);
-  font-size: 1rem;
+  margin-left: -0.03em;
 }
 
 .hero__role {
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: clamp(1.3rem, 3.2vw, 1.85rem);
+  font-weight: 300;
   color: var(--text-secondary);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
 }
 
 /* Location */
@@ -75,13 +60,15 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  margin-top: 0.25rem;
 }
 
 .hero__location {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 /* Social */
@@ -135,10 +122,14 @@
   }
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, transparent 60%, color-mix(in srgb, var(--bg) 30%, transparent) 100%);
+    background: linear-gradient(
+      to bottom,
+      transparent 60%,
+      color-mix(in srgb, var(--bg) 30%, transparent) 100%
+    );
   }
 }
 

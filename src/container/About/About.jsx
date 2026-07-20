@@ -1,9 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { AppWrap } from "../../wrapper";
+import experiencess from "../Skills/experiencess";
 import "./About.scss";
 
 const About = () => {
+  const education = experiencess.filter((e) => e.tags.includes("Education"));
+
   return (
     <div className="about-section">
       <div className="about-section__inner">
@@ -34,6 +37,35 @@ const About = () => {
             Currently looking for a Software Engineering internship where I can contribute
             to meaningful products and continue growing as an engineer.
           </p>
+
+          {/* Education block */}
+          <div className="about-education">
+            <div className="exp-col">
+              <div className="exp-col__label">Education</div>
+              <div className="exp-col__rule" />
+              {education.map((e, i) => (
+                <div className="exp-entry" key={i}>
+                  <div className="exp-entry__title">{e.year}</div>
+                  {e.works.map((w, wi) => (
+                    <div key={wi} className="exp-entry__sub">{w.name}</div>
+                  ))}
+                  {e.courses && (
+                    <div className="exp-entry__courses">
+                      <div className="exp-entry__courses-label">Key Coursework</div>
+                      <div className="exp-entry__courses-grid">
+                        {e.courses.map((course, ci) => (
+                          <div key={ci} className="exp-entry__course-item">
+                            <span className="exp-entry__course-code">{course.code}:</span>
+                            <span className="exp-entry__course-name">{course.name}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
         </motion.div>
       </div>
     </div>

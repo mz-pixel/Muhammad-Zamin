@@ -2,6 +2,45 @@ import { images } from "../../constants";
 
 const projects = [
   {
+    title: "Orbit",
+    description:
+      "A real-time workspace collaboration platform (similar to Slack/Teams) featuring multi-tenant workspaces, real-time messaging, typing indicators, presence tracking, and collaborative rich-text documents.",
+    img: images.orbit_dashboard,
+    tags: [
+      "Next.js",
+      "Express",
+      "TypeScript",
+      "Socket.IO",
+      "PostgreSQL",
+      "Prisma",
+      "Zustand",
+      "Docker",
+    ],
+    role: "Full Stack Developer",
+    type: "WIP / WebApp",
+    year: "In Progress",
+    impact:
+      "Completed: WebSocket-based live chat, user online presence sync, and workspace switcher. In Progress: TipTap + Yjs real-time collaborative editing.",
+    codeLink: "https://github.com/mz-pixel/orbit-frontend",
+    projectLink: null,
+    format: "WIP",
+  },
+  {
+    title: "VQM",
+    description:
+      "A Virtual Queue Management application designed to allow customers to join and track queues virtually in real time, featuring an interactive admin/staff dashboard to manage queues and view customer analytics.",
+    img: images.vqm,
+    tags: ["React", "Node.js", "Express", "Socket.IO", "MongoDB"],
+    role: "Full Stack Developer",
+    type: "WebApp",
+    year: "2025/26",
+    impact:
+      "Implemented full real-time queue synchronization and status updates under 1 second using Socket.IO.",
+    codeLink: "https://github.com/mz-pixel/VQM-AHCH",
+    projectLink: null,
+    format: "WebApp",
+  },
+  {
     title: "Hayaat Banquet Registration & Admin Portal",
     description:
       "A web application using Java/Spring for the backend and React for the frontend, integrating the Yelp API for location-based business search and discovery.",
@@ -9,8 +48,9 @@ const projects = [
     tags: ["Next.js", "Stripe", "Resend", "Tailwind", "Framer-motion"],
     role: "Full Stack Developer",
     type: "WebApp",
-    year: "2024",
-    impact: "Hosted over 300 users on the website",
+    year: "2025/26",
+    impact:
+      "Hosted over 300 registrants on the website with on-site payments generating over $7500 in revenue",
     projectLink: "https://hayaat.thaqalayn.ca",
     format: "WebApp",
   },
@@ -23,15 +63,15 @@ const projects = [
     role: "Full Stack Developer",
     type: "WebApp",
     year: "2024",
-    impact:
-      "Integrated real-time Yelp API data with custom caching, reducing redundant API calls by ~60%.",
+    // impact:
+    // "Integrated real-time Yelp API data with custom caching, reducing redundant API calls by ~60%.",
     codeLink: "https://github.com/mz-pixel/yelp",
     youtubeLink: "https://youtu.be/tsxTDkzHWOY",
     projectLink: null,
     format: "WebApp",
   },
   {
-    title: "Simple To-do List",
+    title: "To-do List",
     description:
       "A full-stack todo list application with a RESTful backend using MongoDB and Express.js. Implemented complete CRUD operations and persistent data storage.",
     img: images.todo,

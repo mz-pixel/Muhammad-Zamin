@@ -14,7 +14,12 @@ const AppInner = () => {
   const { triggerTransition } = usePageTransition();
 
   useEffect(() => {
+    const scrollContainer = document.querySelector(".app__scroll-container");
+    if (!scrollContainer) return;
+
     const lenis = new Lenis({
+      wrapper: scrollContainer,
+      content: scrollContainer,
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
@@ -47,17 +52,21 @@ const AppInner = () => {
   }, [triggerTransition]);
 
   return (
-    <div className="app">
+    <>
       <div className="viewport-frame" />
       <CustomCursor />
       <PageTransition />
       <Navbar />
-      <Header />
-      <About />
-      <Skills />
-      <Work />
-      <Footer />
-    </div>
+      <div className="app">
+        <div className="app__scroll-container">
+          <Header />
+          <About />
+          <Skills />
+          <Work />
+          <Footer />
+        </div>
+      </div>
+    </>
   );
 };
 

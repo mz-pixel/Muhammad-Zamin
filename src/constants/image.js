@@ -45,10 +45,14 @@ import express from "../assets/express.svg";
 import bootstrap from "../assets/bootstrap.jpg";
 import medsync from "../assets/medsync.png";
 import sharelyst from "../assets/sharelyst.png";
+import orbit_dashboard from "../assets/orbit_dashboard.png";
+import vqm from "../assets/vqm.png";
 
 const images = {
   sharelyst,
   medsync,
+  orbit_dashboard,
+  vqm,
   // simon,
   email,
   // mobile,

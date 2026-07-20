@@ -21,9 +21,13 @@ const Navbar = () => {
   const { triggerTransition }   = usePageTransition();
 
   useEffect(() => {
+    const scrollContainer = document.querySelector(".app__scroll-container");
+    if (!scrollContainer) return;
+
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-      const scrollY = window.scrollY + 200;
+      const currentScrollY = scrollContainer.scrollTop;
+      setScrolled(currentScrollY > 50);
+      const scrollY = currentScrollY + 200;
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
         if (el && el.offsetTop <= scrollY) {
@@ -32,8 +36,8 @@ const Navbar = () => {
         }
       }
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    scrollContainer.addEventListener("scroll", handleScroll);
+    return () => scrollContainer.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Lock scroll on mobile menu open
@@ -74,7 +78,7 @@ const Navbar = () => {
 
       {/* Desktop links — absolutely centered */}
       <ul className="navbar__links">
-        {sections.slice(1).map((item) => (
+        {sections.map((item) => (
           <li key={`nav-${item}`}>
             <button
               className={`navbar__link ${active === item ? "navbar__link--active" : ""}`}

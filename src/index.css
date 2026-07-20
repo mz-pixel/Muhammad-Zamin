@@ -1,5 +1,5 @@
 /* ===== Google Fonts ===== */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
 /* ================================================================
    LIGHT MODE (default)
@@ -16,6 +16,14 @@
   --bg-outer:        #096A47; /* Outer viewport frame background */
   --bg-surface:      #DCE1E6;
   --bg-surface-hover:#CFD5DB;
+
+  /* Navbar Configuration */
+  --navbar-height:      80px;
+  --navbar-bg:          var(--bg-outer);
+  --navbar-text:        var(--bg);
+  --navbar-text-muted:  rgba(233, 236, 239, 0.78);
+  --navbar-border:      rgba(233, 236, 239, 0.22);
+  --navbar-toggle-track:rgba(233, 236, 239, 0.18);
 
   /* Text (Slate/Charcoal) */
   --text-primary:    #12181B;
@@ -36,13 +44,13 @@
   --cat-ml:          #576B61;
 
   /* Typography */
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-body:  'DM Sans', system-ui, sans-serif;
+  --font-serif: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body:  'Inter', system-ui, sans-serif;
   --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
 
   /* Spacing */
-  --section-padding:        6rem 2rem;
-  --section-padding-mobile: 4rem 1.25rem;
+  --section-padding:        6rem 6vw;
+  --section-padding-mobile: 4rem 5vw;
   --container-max:          1100px;
 
   /* Radius */
@@ -75,6 +83,13 @@
   --bg-outer:        #DCE2E7; /* Outer viewport frame background */
   --bg-surface:      #0F241A;
   --bg-surface-hover:#173426;
+
+  /* Navbar Configuration */
+  --navbar-bg:          var(--bg-outer);
+  --navbar-text:        var(--bg);
+  --navbar-text-muted:  rgba(7, 21, 14, 0.78);
+  --navbar-border:      rgba(7, 21, 14, 0.22);
+  --navbar-toggle-track:rgba(7, 21, 14, 0.18);
 
   /* Text (Premium Silver) */
   --text-primary:    #EDF2F4;
@@ -116,17 +131,20 @@
 }
 
 html {
+  height: 100%;
+  overflow: hidden;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
+  height: 100%;
+  overflow: hidden;
   font-family: var(--font-body);
   background-color: var(--bg-outer);
   color: var(--text-primary);
   line-height: 1.6;
-  overflow-x: hidden;
   cursor: none;
   transition: background-color 0.35s var(--ease-in-out),
               color 0.35s var(--ease-in-out);
@@ -206,7 +224,7 @@ html.lenis, html.lenis body {
 /* ===== Viewport Frame Mask (Squircle background card effect) ===== */
 .viewport-frame {
   position: fixed;
-  top: var(--frame-gap, 8px);
+  top: var(--navbar-height);
   bottom: var(--frame-gap, 8px);
   left: var(--frame-gap, 8px);
   right: var(--frame-gap, 8px);
@@ -221,5 +239,6 @@ html.lenis, html.lenis body {
   :root {
     --frame-gap: 4px;
     --frame-radius: 8px;
+    --navbar-height: 64px;
   }
 }

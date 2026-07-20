@@ -15,8 +15,13 @@
   border-radius: 50%;
   background: var(--cursor-dot-color);
   pointer-events: none;
-  z-index: 10001;
+  z-index: 20001; /* Place on top of navbar (10000) */
   will-change: transform;
+  transition: background-color 0.25s ease;
+
+  &--navbar {
+    background: var(--navbar-text);
+  }
 }
 
 .cursor-ring {
@@ -28,7 +33,7 @@
   border-radius: 50%;
   border: 1px solid var(--cursor-ring-color);
   pointer-events: none;
-  z-index: 10000;
+  z-index: 20000; /* Place on top of navbar (10000) */
   will-change: transform;
   transition: width 0.25s ease, height 0.25s ease, top 0.25s ease, left 0.25s ease, border-color 0.25s ease;
 
@@ -38,5 +43,13 @@
     top: -18px;
     left: -18px;
     border-color: var(--cursor-ring-hover);
+  }
+
+  &--navbar {
+    border-color: var(--navbar-text-muted);
+
+    &.cursor-ring--hover {
+      border-color: var(--navbar-text);
+    }
   }
 }
