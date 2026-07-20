@@ -142,7 +142,8 @@
   border-bottom: 1px solid transparent;
   transition: color 0.25s ease, border-color 0.25s ease;
 
-  &:hover {
+  &:hover,
+  &--active {
     color: var(--navbar-text);
     border-bottom-color: var(--navbar-text);
   }

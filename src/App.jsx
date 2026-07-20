@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Footer, Header, Skills, Work, About } from "./container";
+import React, { useEffect, useState } from "react";
+import { Footer, Header, Skills, Work, About, Resume } from "./container";
 import { Navbar } from "./components";
 import { PageTransitionProvider } from "./components/PageTransition/PageTransitionContext";
 import PageTransition from "./components/PageTransition/PageTransition";
@@ -10,6 +10,19 @@ import "./App.scss";
 
 // Inner app
 const AppInner = () => {
+  const [view, setView] = useState(window.location.hash === "#resume" ? "resume" : "home");
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setView(window.location.hash === "#resume" ? "resume" : "home");
+      // Scroll container to top when view swaps
+      const scrollContainer = document.querySelector(".app__scroll-container");
+      if (scrollContainer) scrollContainer.scrollTop = 0;
+    };
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
   useEffect(() => {
     const scrollContainer = document.querySelector(".app__scroll-container");
     if (!scrollContainer) return;
@@ -45,11 +58,17 @@ const AppInner = () => {
       <Navbar />
       <div className="app">
         <div className="app__scroll-container">
-          <Header />
-          <About />
-          <Skills />
-          <Work />
-          <Footer />
+          {view === "resume" ? (
+            <Resume />
+          ) : (
+            <>
+              <Header />
+              <About />
+              <Skills />
+              <Work />
+              <Footer />
+            </>
+          )}
         </div>
       </div>
     </>

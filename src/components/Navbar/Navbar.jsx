@@ -48,15 +48,25 @@ const Navbar = () => {
 
   const scrollTo = (id) => {
     triggerTransition(() => {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "auto" });
+      if (window.location.hash === "#resume") {
+        window.location.hash = "";
+        setTimeout(() => {
+          const el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: "auto" });
+        }, 50);
+      } else {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "auto" });
+      }
     });
     setToggle(false);
   };
 
   const handleResumeClick = (e) => {
     e.preventDefault();
-    triggerTransition(() => window.open("/Muhammad Zamin resume.pdf", "_blank"));
+    triggerTransition(() => {
+      window.location.hash = "#resume";
+    });
   };
 
   return (
@@ -81,7 +91,7 @@ const Navbar = () => {
         {sections.map((item) => (
           <li key={`nav-${item}`}>
             <button
-              className={`navbar__link ${active === item ? "navbar__link--active" : ""}`}
+              className={`navbar__link ${active === item && window.location.hash !== "#resume" ? "navbar__link--active" : ""}`}
               onClick={() => scrollTo(item)}
               id={`nav-link-${item}`}
             >
@@ -96,7 +106,7 @@ const Navbar = () => {
         <ThemeToggle />
         <a
           href="/Muhammad Zamin resume.pdf"
-          className="navbar__resume"
+          className={`navbar__resume ${window.location.hash === "#resume" ? "navbar__resume--active" : ""}`}
           id="navbar-resume"
           onClick={handleResumeClick}
         >
@@ -144,7 +154,7 @@ const Navbar = () => {
                   >
                     <button
                       onClick={() => scrollTo(item)}
-                      className={active === item ? "active" : ""}
+                      className={active === item && window.location.hash !== "#resume" ? "active" : ""}
                       id={`mobile-nav-${item}`}
                     >
                       {sectionLabels[item]}
@@ -158,7 +168,7 @@ const Navbar = () => {
                 >
                   <a
                     href="/Muhammad Zamin resume.pdf"
-                    className="navbar__mobile-resume-link"
+                    className={`navbar__mobile-resume-link ${window.location.hash === "#resume" ? "active" : ""}`}
                     id="mobile-nav-resume"
                     onClick={handleResumeClick}
                   >
