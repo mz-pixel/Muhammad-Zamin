@@ -11,7 +11,7 @@ const AppWrap = (Component, idName, classNames) =>
           <Component />
           {idName === "contact" && (
             <div className="copyright">
-              <p>Built with care in Toronto.</p>
+              <p>Built with 💚 in Toronto.</p>
             </div>
           )}
         </div>
