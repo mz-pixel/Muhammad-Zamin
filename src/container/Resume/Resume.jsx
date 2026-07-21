@@ -16,8 +16,12 @@ const Resume = () => {
   };
 
   const handleDownload = () => {
-    // Open the PDF in a new tab for printing/saving
-    window.open("/Muhammad Zamin resume.pdf", "_blank");
+    const link = document.createElement("a");
+    link.href = "/Muhammad Zamin resume.pdf";
+    link.download = "Muhammad Zamin Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -42,7 +46,7 @@ const Resume = () => {
         {/* Header Block */}
         <header className="resume-sheet__header">
           <h1 className="resume-name">Muhammad Zamin</h1>
-          <p className="resume-subtitle">B.Sc. Computer Science Graduate</p>
+          <p className="resume-subtitle">Specialized Honours B.Sc. in Computer Science</p>
           
           <div className="resume-contact-grid">
             <a href="tel:6477645530" className="contact-item">
@@ -51,7 +55,7 @@ const Resume = () => {
             <a href="mailto:zaminjamal.zj@gmail.com" className="contact-item">
               <BsEnvelope /> <span>zaminjamal.zj@gmail.com</span>
             </a>
-            <a href="https://linkedin.com/in/mzamin" target="_blank" rel="noopener noreferrer" className="contact-item">
+            <a href="https://www.linkedin.com/in/mzamin/" target="_blank" rel="noopener noreferrer" className="contact-item">
               <BsLinkedin /> <span>LinkedIn</span>
             </a>
             <a href="https://github.com/mz-pixel" target="_blank" rel="noopener noreferrer" className="contact-item">

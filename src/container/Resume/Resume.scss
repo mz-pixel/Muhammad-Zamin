@@ -23,7 +23,8 @@
     align-items: stretch;
   }
 
-  button {
+  button,
+  a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -37,6 +38,7 @@
     cursor: none;
     transition: all 0.3s var(--ease-out);
     white-space: nowrap;
+    text-decoration: none;
 
     svg {
       font-size: 0.95rem;

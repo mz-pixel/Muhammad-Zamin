@@ -4,10 +4,10 @@ import { usePageTransition } from "./PageTransitionContext";
 import "./PageTransition.scss";
 
 /* ─── Timing constants ──────────────────────────────────────────── */
-const PANEL_DURATION   = 0.28;  // how long each panel slides
-const MIDPOINT_DELAY   = 0.30;  // when to fire the callback (just after panels meet)
-const EXIT_DELAY       = 0.50;  // when panels start exiting
-const TOTAL_DURATION   = 0.85;  // full animation
+const PANEL_DURATION   = 0.19;  // how long each panel slides
+const MIDPOINT_DELAY   = 0.20;  // when to fire the callback (just after panels meet)
+const EXIT_DELAY       = 0.31;  // when panels start exiting
+const TOTAL_DURATION   = 0.55;  // full animation
 
 const panelVariants = {
   left: {
@@ -23,9 +23,9 @@ const panelVariants = {
 };
 
 const initialsVariants = {
-  hidden:  { opacity: 0, y: 8 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.2, delay: PANEL_DURATION } },
-  exit:    { opacity: 0, transition: { duration: 0.15 } },
+  hidden:  { opacity: 0, y: 5 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.14, delay: PANEL_DURATION } },
+  exit:    { opacity: 0, transition: { duration: 0.10 } },
 };
 
 const PageTransition = () => {

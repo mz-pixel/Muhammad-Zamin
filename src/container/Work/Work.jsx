@@ -6,7 +6,14 @@ import { usePageTransition } from "../../components/PageTransition/PageTransitio
 import "./Work.scss";
 import projects from "./projects";
 
-const FILTERS = ["All", "WebApp", "Machine Learning", "Mobile Application", "WIP", "Open Source"];
+const FILTERS = [
+  "All",
+  "WebApp",
+  "Machine Learning",
+  "Mobile Application",
+  "WIP",
+  "Open Source",
+];
 
 const Work = () => {
   const [tag, setTag] = useState("All");
@@ -25,9 +32,8 @@ const Work = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const filtered = tag === "All"
-    ? projects
-    : projects.filter((p) => p.format === tag);
+  const filtered =
+    tag === "All" ? projects : projects.filter((p) => p.format === tag);
 
   const displayProject = hoveredProject || selectedProject || filtered[0];
 
@@ -47,23 +53,28 @@ const Work = () => {
         </h2>
       </div>
 
-      {/* Filter — plain text tabs */}
+      {/* Filter — plain text tabs + hint */}
       <div className="work-section__filters">
-        {FILTERS.map((f) => (
-          <button
-            key={f}
-            onClick={() => {
-              setTag(f);
-              setHoveredProject(null);
-              setSelectedProject(null);
-              setActiveMobileProject(null);
-            }}
-            className={`work-filter ${tag === f ? "work-filter--active" : ""}`}
-            id={`work-filter-${f.toLowerCase().replace(/\s+/g, "-")}`}
-          >
-            {f}
-          </button>
-        ))}
+        <div className="work-section__filter-buttons">
+          {FILTERS.map((f) => (
+            <button
+              key={f}
+              onClick={() => {
+                setTag(f);
+                setHoveredProject(null);
+                setSelectedProject(null);
+                setActiveMobileProject(null);
+              }}
+              className={`work-filter ${tag === f ? "work-filter--active" : ""}`}
+              id={`work-filter-${f.toLowerCase().replace(/\s+/g, "-")}`}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+        <span className="work-section__hint">
+          <span className="hint-dot" /> Click any project title to view details
+        </span>
       </div>
 
       <div className="work-section__container">
@@ -92,7 +103,9 @@ const Work = () => {
                   return (
                     <motion.div
                       className={`project-row ${isCurrent ? "project-row--active" : ""} ${
-                        !isMobile && hoveredProject?.title === work.title ? "project-row--hovered" : ""
+                        !isMobile && hoveredProject?.title === work.title
+                          ? "project-row--hovered"
+                          : ""
                       }`}
                       key={work.title}
                       initial={{ opacity: 0, y: 15 }}
@@ -103,7 +116,9 @@ const Work = () => {
                       onMouseLeave={() => !isMobile && setHoveredProject(null)}
                       onClick={() => {
                         if (isMobile) {
-                          setActiveMobileProject((prev) => (prev === work.title ? null : work.title));
+                          setActiveMobileProject((prev) =>
+                            prev === work.title ? null : work.title,
+                          );
                         } else {
                           setSelectedProject(work);
                         }
@@ -116,11 +131,18 @@ const Work = () => {
                           <span className="project-row__index">
                             /{String(index + 1).padStart(2, "0")}
                           </span>
-                          <h3 className="project-row__title">{work.title}</h3>
+                          <div className="project-row__title-group">
+                            <h3 className="project-row__title">{work.title}</h3>
+                            <span className="project-row__click-hint">
+                              {isMobile ? "Tap to view →" : "Click to view →"}
+                            </span>
+                          </div>
                         </div>
 
                         <div className="project-row__meta-right">
-                          <span className={`project-row__type ${work.format === "WIP" ? "project-row__type--wip" : ""}`}>
+                          <span
+                            className={`project-row__type ${work.format === "WIP" ? "project-row__type--wip" : ""}`}
+                          >
                             {work.type}
                           </span>
                           {isMobile && (
@@ -153,7 +175,9 @@ const Work = () => {
                                 <a
                                   href={work.projectLink}
                                   className="project-row__link project-row__link--visit"
-                                  onClick={(e) => handleVisit(e, work.projectLink)}
+                                  onClick={(e) =>
+                                    handleVisit(e, work.projectLink)
+                                  }
                                   aria-label="Visit site"
                                 >
                                   <span>Visit →</span>
@@ -173,7 +197,10 @@ const Work = () => {
                             height: isExpanded ? "auto" : 0,
                             opacity: isExpanded ? 1 : 0,
                           }}
-                          transition={{ duration: 0.35, ease: [0.76, 0, 0.24, 1] }}
+                          transition={{
+                            duration: 0.35,
+                            ease: [0.76, 0, 0.24, 1],
+                          }}
                           style={{ overflow: "hidden" }}
                         >
                           <div className="project-row__details-inner">
@@ -184,29 +211,45 @@ const Work = () => {
                                 className="project-row__mobile-img"
                               />
                             </div>
-                            <p className="project-row__desc">{work.description}</p>
-                            
+                            <p className="project-row__desc">
+                              {work.description}
+                            </p>
+
                             <div className="project-row__subdetails">
                               <div className="project-row__subdetail-item">
-                                <span className="project-row__subdetail-label">Role</span>
-                                <span className="project-row__subdetail-value">{work.role}</span>
+                                <span className="project-row__subdetail-label">
+                                  Role
+                                </span>
+                                <span className="project-row__subdetail-value">
+                                  {work.role}
+                                </span>
                               </div>
                               <div className="project-row__subdetail-item">
-                                <span className="project-row__subdetail-label">Stack</span>
+                                <span className="project-row__subdetail-label">
+                                  Stack
+                                </span>
                                 <span className="project-row__subdetail-value tech-tag">
                                   {work.tags.join(" · ")}
                                 </span>
                               </div>
                               <div className="project-row__subdetail-item">
-                                <span className="project-row__subdetail-label">Year</span>
-                                <span className="project-row__subdetail-value">{work.year}</span>
+                                <span className="project-row__subdetail-label">
+                                  Year
+                                </span>
+                                <span className="project-row__subdetail-value">
+                                  {work.year}
+                                </span>
                               </div>
                             </div>
 
                             {work.impact && (
                               <div className="project-row__impact">
-                                <span className="project-row__impact-label">Impact</span>
-                                <p className="project-row__impact-text">{work.impact}</p>
+                                <span className="project-row__impact-label">
+                                  Impact
+                                </span>
+                                <p className="project-row__impact-text">
+                                  {work.impact}
+                                </p>
                               </div>
                             )}
                           </div>
@@ -248,14 +291,20 @@ const Work = () => {
                       <span>•</span>
                       <span>{displayProject.role}</span>
                       <span>•</span>
-                      <span className={`work-showcase__type-badge ${displayProject.format === "WIP" ? "project-row__type--wip" : ""}`}>
+                      <span
+                        className={`work-showcase__type-badge ${displayProject.format === "WIP" ? "project-row__type--wip" : ""}`}
+                      >
                         {displayProject.type}
                       </span>
                     </div>
 
-                    <h3 className="work-showcase__title">{displayProject.title}</h3>
-                    
-                    <p className="work-showcase__desc">{displayProject.description}</p>
+                    <h3 className="work-showcase__title">
+                      {displayProject.title}
+                    </h3>
+
+                    <p className="work-showcase__desc">
+                      {displayProject.description}
+                    </p>
 
                     <div className="work-showcase__tags">
                       {displayProject.tags.join("  ·  ")}
@@ -263,8 +312,12 @@ const Work = () => {
 
                     {displayProject.impact && (
                       <div className="work-showcase__impact">
-                        <span className="work-showcase__impact-label">Impact</span>
-                        <p className="work-showcase__impact-text">{displayProject.impact}</p>
+                        <span className="work-showcase__impact-label">
+                          Impact
+                        </span>
+                        <p className="work-showcase__impact-text">
+                          {displayProject.impact}
+                        </p>
                       </div>
                     )}
 
@@ -273,7 +326,9 @@ const Work = () => {
                         <a
                           href={displayProject.projectLink}
                           className="btn-editorial btn-editorial--accent"
-                          onClick={(e) => handleVisit(e, displayProject.projectLink)}
+                          onClick={(e) =>
+                            handleVisit(e, displayProject.projectLink)
+                          }
                         >
                           Visit Site →
                         </a>

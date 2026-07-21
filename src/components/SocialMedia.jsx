@@ -16,7 +16,7 @@ const SocialMedia = ({ size = "md" }) => {
         <BsGithub style={{ width: iconSize, height: iconSize }} />
       </a>
       <a
-        href="https://www.linkedin.com/in/muhammad-zamin-4b4998209/"
+        href="https://www.linkedin.com/in/mzamin/"
         target="_blank"
         rel="noopener noreferrer"
         className="social-link"

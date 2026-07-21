@@ -28,7 +28,7 @@ const projects = [
   {
     title: "Hayaat Banquet Registration & Admin Portal",
     description:
-      "A web application using Java/Spring for the backend and React for the frontend, integrating the Yelp API for location-based business search and discovery.",
+      "A full-stack event registration and management platform featuring online ticketing, Stripe payment integration, automated email confirmations via Resend, live admin dashboards, and QR code check-ins.",
     img: images.hayaat,
     tags: ["Next.js", "Stripe", "Resend", "Tailwind", "Framer-motion"],
     role: "Full Stack Developer",
@@ -87,20 +87,52 @@ const projects = [
     format: "WebApp",
   },
   {
-    title: "EECS 3404: Applied ML",
+    title: "Image Classification via CNNs",
     description:
-      "Machine learning coursework applying classification, regression, and neural network models to real-world datasets using Python's scientific computing stack.",
+      "Developed a Convolutional Neural Network (CNN) for multi-class image classification on the CIFAR-10 dataset using PyTorch. Achieved 82% testing accuracy through architecture optimization, hyperparameter tuning, and advanced data augmentation.",
     img: images.python,
-    tags: ["SciKit-Learn", "Pandas", "NumPy", "TensorFlow"],
+    tags: ["PyTorch", "Torchvision", "NumPy", "Matplotlib", "Python"],
     role: "ML Engineer",
     type: "Machine Learning",
-    year: "2024",
+    year: "2025",
     impact:
-      "Achieved 91% accuracy on the final classification project using an ensemble SVM + decision tree model.",
+      "Achieved 82% testing accuracy on CIFAR-10 dataset using PyTorch with advanced data augmentation and normalization.",
     codeLink: null,
     youtubeLink: null,
     projectLink: null,
     format: "Machine Learning",
+  },
+  {
+    title: "Custom Malware Detection using YARA",
+    description:
+      "Analyzed Windows malware samples using static analysis to identify suspicious behaviors. Designed a custom YARA rule leveraging PE structure, anomalous timestamps, and string patterns with multi-condition detection logic.",
+    img: images.cpp,
+    tags: ["YARA", "Linux", "Reverse Engineering", "Security"],
+    role: "Security Engineer",
+    type: "Computer Security",
+    year: "2025",
+    impact:
+      "Engineered multi-condition detection logic and validated rule accuracy using binwalk and rabin2.",
+    codeLink: null,
+    youtubeLink: null,
+    projectLink: null,
+    format: "Open Source",
+  },
+  {
+    title: "B-Minor Compiler",
+    description:
+      "Built a C-like language compiler using Flex and Bison for lexical and syntax analysis. Implemented name resolution, semantic type checking, and an x86-64 code generator with stack management, control flow handling, and function calls.",
+    img: images.cpp,
+    tags: ["C", "Flex", "Bison", "x86-64", "Linux"],
+    role: "Systems Engineer",
+    type: "Compiler / Systems",
+    year: "2025",
+    impact:
+      "Built complete end-to-end compiler generating valid x86-64 assembly with full type checking and control flow.",
+    codeLink: null,
+    youtubeLink: null,
+    projectLink: null,
+    format: "Open Source",
   },
   {
     title: "To-do List",
@@ -127,8 +159,6 @@ const projects = [
     role: "Full Stack Developer",
     type: "WebApp",
     year: "2024",
-    // impact:
-    // "Integrated real-time Yelp API data with custom caching, reducing redundant API calls by ~60%.",
     codeLink: "https://github.com/mz-pixel/yelp",
     youtubeLink: "https://youtu.be/tsxTDkzHWOY",
     projectLink: null,
