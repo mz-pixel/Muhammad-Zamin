@@ -35,7 +35,7 @@ const Work = () => {
   const filtered =
     tag === "All" ? projects : projects.filter((p) => p.format === tag);
 
-  const displayProject = hoveredProject || selectedProject || filtered[0];
+  const displayProject = selectedProject || hoveredProject || filtered[0];
 
   const handleVisit = (e, url) => {
     e.stopPropagation(); // Prevent trigger change
@@ -96,6 +96,8 @@ const Work = () => {
               ) : (
                 filtered.map((work, index) => {
                   const isCurrent = displayProject?.title === work.title;
+                  const isSelected = selectedProject?.title === work.title;
+                  const isHovered = hoveredProject?.title === work.title;
                   const isExpanded = isMobile
                     ? activeMobileProject === work.title
                     : hoveredProject?.title === work.title;
@@ -103,9 +105,9 @@ const Work = () => {
                   return (
                     <motion.div
                       className={`project-row ${isCurrent ? "project-row--active" : ""} ${
-                        !isMobile && hoveredProject?.title === work.title
-                          ? "project-row--hovered"
-                          : ""
+                        isSelected ? "project-row--selected" : ""
+                      } ${
+                        !isMobile && isHovered ? "project-row--hovered" : ""
                       }`}
                       key={work.title}
                       initial={{ opacity: 0, y: 15 }}
@@ -120,7 +122,7 @@ const Work = () => {
                             prev === work.title ? null : work.title,
                           );
                         } else {
-                          setSelectedProject(work);
+                          setSelectedProject((prev) => prev?.title === work.title ? null : work);
                         }
                       }}
                       id={`project-${work.title.toLowerCase().replace(/\s+/g, "-")}`}
@@ -134,7 +136,11 @@ const Work = () => {
                           <div className="project-row__title-group">
                             <h3 className="project-row__title">{work.title}</h3>
                             <span className="project-row__click-hint">
-                              {isMobile ? "Tap to view →" : "Click to view →"}
+                              {isSelected 
+                                ? "Selected" 
+                                : isMobile 
+                                  ? "Tap to view →" 
+                                  : "Click to view →"}
                             </span>
                           </div>
                         </div>
@@ -269,7 +275,7 @@ const Work = () => {
             <div className="work-showcase__sticky-wrapper">
               <div className="work-showcase__card">
                 <div className="work-showcase__image-container">
-                  <AnimatePresence mode="wait">
+                  <AnimatePresence>
                     <motion.img
                       key={displayProject.title}
                       src={displayProject.img}
@@ -284,85 +290,87 @@ const Work = () => {
                   <div className="work-showcase__image-overlay" />
                 </div>
 
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={displayProject.title}
-                    className="work-showcase__content"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <div className="work-showcase__header">
-                      <span>{displayProject.year}</span>
-                      <span>•</span>
-                      <span>{displayProject.role}</span>
-                      <span>•</span>
-                      <span
-                        className={`work-showcase__type-badge ${displayProject.format === "WIP" ? "project-row__type--wip" : ""}`}
-                      >
-                        {displayProject.type}
+                <div className="work-showcase__content">
+                  <div className="work-showcase__header">
+                    <span>{displayProject.year}</span>
+                    <span>•</span>
+                    <span>{displayProject.role}</span>
+                    <span>•</span>
+                    <span
+                      className={`work-showcase__type-badge ${displayProject.format === "WIP" ? "project-row__type--wip" : ""}`}
+                    >
+                      {displayProject.type}
+                    </span>
+                  </div>
+
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={displayProject.title}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                      style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}
+                    >
+                      <h3 className="work-showcase__title">
+                        {displayProject.title}
+                      </h3>
+
+                      <p className="work-showcase__desc">
+                        {displayProject.description}
+                      </p>
+                    </motion.div>
+                  </AnimatePresence>
+
+                  <div className="work-showcase__tags">
+                    {displayProject.tags.join("  ·  ")}
+                  </div>
+
+                  {displayProject.impact && (
+                    <div className="work-showcase__impact">
+                      <span className="work-showcase__impact-label">
+                        Impact
                       </span>
+                      <p className="work-showcase__impact-text">
+                        {displayProject.impact}
+                      </p>
                     </div>
+                  )}
 
-                    <h3 className="work-showcase__title">
-                      {displayProject.title}
-                    </h3>
-
-                    <p className="work-showcase__desc">
-                      {displayProject.description}
-                    </p>
-
-                    <div className="work-showcase__tags">
-                      {displayProject.tags.join("  ·  ")}
-                    </div>
-
-                    {displayProject.impact && (
-                      <div className="work-showcase__impact">
-                        <span className="work-showcase__impact-label">
-                          Impact
-                        </span>
-                        <p className="work-showcase__impact-text">
-                          {displayProject.impact}
-                        </p>
-                      </div>
+                  <div className="work-showcase__footer-links">
+                    {displayProject.projectLink && (
+                      <a
+                        href={displayProject.projectLink}
+                        className="btn-editorial btn-editorial--accent"
+                        onClick={(e) =>
+                          handleVisit(e, displayProject.projectLink)
+                        }
+                      >
+                        Visit Site →
+                      </a>
                     )}
-
-                    <div className="work-showcase__footer-links">
-                      {displayProject.projectLink && (
-                        <a
-                          href={displayProject.projectLink}
-                          className="btn-editorial btn-editorial--accent"
-                          onClick={(e) =>
-                            handleVisit(e, displayProject.projectLink)
-                          }
-                        >
-                          Visit Site →
-                        </a>
-                      )}
-                      {displayProject.codeLink && (
-                        <a
-                          href={displayProject.codeLink}
-                          className="btn-editorial"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <AiFillGithub /> Github
-                        </a>
-                      )}
-                      {displayProject.youtubeLink && (
-                        <a
-                          href={displayProject.youtubeLink}
-                          className="btn-editorial btn-editorial--youtube"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <AiFillYoutube /> Demo
-                        </a>
-                      )}
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
+                    {displayProject.codeLink && (
+                      <a
+                        href={displayProject.codeLink}
+                        className="btn-editorial btn-editorial--github"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <AiFillGithub /> Github
+                      </a>
+                    )}
+                    {displayProject.youtubeLink && (
+                      <a
+                        href={displayProject.youtubeLink}
+                        className="btn-editorial btn-editorial--youtube"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <AiFillYoutube /> Demo
+                      </a>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

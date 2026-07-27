@@ -34,43 +34,91 @@
     font-size: 0.82rem;
     font-weight: 500;
     letter-spacing: 0.04em;
-    border-radius: var(--radius-md);
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
     cursor: none;
-    transition: all 0.3s var(--ease-out);
     white-space: nowrap;
     text-decoration: none;
 
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+
+    transition:
+      border-color 0.35s ease,
+      color 0.35s ease;
+
     svg {
       font-size: 0.95rem;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      z-index: -1;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    &:hover::before {
+      transform: scaleX(1);
     }
   }
 
   .btn-resume-back {
     color: var(--text-secondary);
     background: transparent;
-    border: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    border-left: none;
+    border-right: none;
+
+    &::before {
+      background: var(--bg-surface);
+    }
 
     &:hover {
       color: var(--text-primary);
       border-color: var(--border-hover);
-      background: var(--bg-surface);
     }
   }
 
   .btn-resume-download {
     color: var(--bg);
     background: var(--accent);
-    border: 1px solid var(--accent);
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    border-left: none;
+    border-right: none;
 
     [data-theme="dark"] & {
       color: var(--bg);
       background: var(--text-primary);
-      border-color: var(--text-primary);
+      border-top: 1px solid var(--text-primary);
+      border-bottom: 1px solid var(--text-primary);
+    }
+
+    &::before {
+      background: var(--text-primary); // wipes a different color (charcoal) in light mode
+
+      [data-theme="dark"] & {
+        background: var(--accent); // wipes a different color (emerald green) in dark mode
+      }
     }
 
     &:hover {
-      opacity: 0.9;
-      transform: translateY(-1px);
+      color: var(--bg);
+      border-color: var(--text-primary);
+
+      [data-theme="dark"] & {
+        border-color: var(--accent);
+      }
     }
   }
 }

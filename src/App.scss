@@ -119,29 +119,65 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-primary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
+  
+  /* Remove rounded corners and side outlines */
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+  
   text-decoration: none;
   cursor: none;
+  background: transparent;
+  
+  /* Transition and positioning preparation for wipe */
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  
   transition:
-    border-color 0.3s ease,
-    color 0.3s ease,
-    background 0.3s ease;
+    border-color 0.35s ease,
+    color 0.35s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    background: var(--accent-dim);
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
 
   &:hover {
     border-color: var(--border-hover);
     color: var(--accent);
-    background: var(--accent-dim);
+
+    &::before {
+      transform: scaleX(1);
+    }
   }
 }
 
 .btn-editorial--accent {
   color: var(--accent);
-  border-color: var(--accent-dim);
+  border-top: 1px solid var(--accent-dim);
+  border-bottom: 1px solid var(--accent-dim);
+  border-left: none;
+  border-right: none;
+
+  &::before {
+    background: var(--accent);
+  }
 
   &:hover {
-    background: var(--accent-dim);
     border-color: var(--accent);
+    color: var(--bg);
   }
 }
 

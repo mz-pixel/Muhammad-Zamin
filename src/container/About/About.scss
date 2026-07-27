@@ -128,39 +128,31 @@
 
 .exp-entry__course-item {
   font-family: var(--font-body);
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  padding: 0.4rem 0.75rem;
-  border-radius: var(--radius-sm);
   display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-  transition:
-    border-color 0.3s var(--ease-out),
-    background 0.3s var(--ease-out),
-    transform 0.3s var(--ease-out);
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px dotted var(--border);
+  background: transparent;
+  transition: border-color 0.25s ease;
 
   &:hover {
     border-color: var(--accent);
-    background: var(--accent-dim);
-    transform: translateY(-1px);
   }
 }
 
 .exp-entry__course-code {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: var(--text-muted);
-  transition: color 0.3s ease;
-
-  .exp-entry__course-item:hover & {
-    color: var(--accent);
-  }
+  font-size: 0.7rem;
+  color: var(--accent);
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .exp-entry__course-name {
+  font-family: var(--font-body);
   font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--text-primary);
+  color: var(--text-secondary);
+  line-height: 1.4;
 }
 

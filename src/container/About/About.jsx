@@ -55,7 +55,7 @@ const About = () => {
                       <div className="exp-entry__courses-grid">
                         {e.courses.map((course, ci) => (
                           <div key={ci} className="exp-entry__course-item">
-                            <span className="exp-entry__course-code">{course.code}:</span>
+                            <span className="exp-entry__course-code">{course.code}</span>
                             <span className="exp-entry__course-name">{course.name}</span>
                           </div>
                         ))}
