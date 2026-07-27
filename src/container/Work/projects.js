@@ -30,7 +30,14 @@ const projects = [
     description:
       "A full-stack event registration and management platform featuring online ticketing, Stripe payment integration, automated email confirmations via Resend, live admin dashboards, and QR code check-ins.",
     img: images.hayaat,
-    tags: ["Next.js", "Stripe", "Resend", "Tailwind", "Framer-motion"],
+    tags: [
+      "Google Cloud",
+      "Next.js",
+      "Stripe",
+      "Resend",
+      "Tailwind",
+      "Framer-motion",
+    ],
     role: "Full Stack Developer",
     type: "WebApp",
     year: "2025/26",

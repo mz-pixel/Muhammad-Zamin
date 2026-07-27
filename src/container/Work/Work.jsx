@@ -267,25 +267,32 @@ const Work = () => {
         {!isMobile && displayProject && (
           <div className="work-section__showcase-col">
             <div className="work-showcase__sticky-wrapper">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={displayProject.title}
-                  className="work-showcase__card"
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15 }}
-                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <div className="work-showcase__image-container">
-                    <img
+              <div className="work-showcase__card">
+                <div className="work-showcase__image-container">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={displayProject.title}
                       src={displayProject.img}
                       alt={displayProject.title}
                       className="work-showcase__image"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                     />
-                    <div className="work-showcase__image-overlay" />
-                  </div>
+                  </AnimatePresence>
+                  <div className="work-showcase__image-overlay" />
+                </div>
 
-                  <div className="work-showcase__content">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={displayProject.title}
+                    className="work-showcase__content"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                  >
                     <div className="work-showcase__header">
                       <span>{displayProject.year}</span>
                       <span>•</span>
@@ -354,9 +361,9 @@ const Work = () => {
                         </a>
                       )}
                     </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
             </div>
           </div>
         )}
