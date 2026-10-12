@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { BsArrowLeft, BsDownload, BsEnvelope, BsPhone, BsGithub, BsLinkedin, BsGlobe } from "react-icons/bs";
+import { BsArrowLeft, BsDownload, BsEnvelope, BsGithub, BsLinkedin, BsGlobe } from "react-icons/bs";
 import { usePageTransition } from "../../components/PageTransition/PageTransitionContext";
 import { AppWrap, MotionWrap } from "../../wrapper";
 import "./Resume.scss";
@@ -49,9 +49,6 @@ const Resume = () => {
           <p className="resume-subtitle">Specialized Honours B.Sc. in Computer Science</p>
           
           <div className="resume-contact-grid">
-            <a href="tel:6477645530" className="contact-item">
-              <BsPhone /> <span>647-764-5530</span>
-            </a>
             <a href="mailto:zaminjamal.zj@gmail.com" className="contact-item">
               <BsEnvelope /> <span>zaminjamal.zj@gmail.com</span>
             </a>
